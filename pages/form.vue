@@ -1,13 +1,13 @@
 <template>
     <div class="d-flex justify-content-center align-items-center">
         
-        <div class="row w-75">
+        <div class="row">
             <div class="col-8">
-                <img src="../public/has.png" alt="" class="w-25">
+                <img src="../public/haslogo.png" alt="" class="w-50">
             </div>
-            <div class="col-4">
-                <h3>N° ORDEN</h3>
-                <input type="text">
+            <div class="col-4 d-flex m-auto">
+                <h3 class="order ms-5">N° ORDEN</h3>
+                <input type="text" class="input form-control w-25 ms-2">
             </div>
 
             <div class="col-12 form-floating mt-5 mb-2">
@@ -47,7 +47,7 @@
                 <label for="email" class="form-label fw-bold ms-2">MAIL</label>
             </div>
 
-            <div class="m-3">
+            <div class="mt-5 mb-1">
                 <h2 class="text-center">Información del servicio</h2>
             </div>
             <table class="table table-bordered text-start">
@@ -62,21 +62,22 @@
                 <tbody>
                     <tr>
                         <td colspan="2" class="w-50">
-                            <textarea class=" text form-control" rows="3"></textarea>
+                            <textarea class=" text form-control text-center" rows="3"></textarea>
                         </td>
                         <td>
-                            <textarea class=" text form-control" rows="3"></textarea>
+                            <textarea class=" text form-control text-center" rows="3"></textarea>
                         </td>
                         <td>
-                            <textarea class=" text form-control" rows="3"></textarea>
+                            <textarea class=" text form-control text-center" rows="3"></textarea>
                         </td>
                         <td>
-                            <textarea class=" text form-control" rows="3"></textarea>
+                            <textarea class=" text form-control text-center" rows="3"></textarea>
                         </td>
                     </tr>
                 </tbody>
         </table>
-        <table class="table table-bordered text-start m-4">
+
+        <table class="table table-bordered text-start mt-3">
                 <thead>
                     <tr>
                         <th class="text-center" colspan="2">DESCRIPCION DEL ESTADO EN EL QUE SE RECIBE</th>
@@ -86,16 +87,17 @@
                 <tbody>
                     <tr>
                         <td colspan="2" class="w-75">
-                            <textarea class=" text form-control" rows="6"></textarea>
+                            <textarea class=" text form-control text-center" rows="7"></textarea>
                         </td>
                         <td>
                             <input type="date" class="form-control mb-2">
-                            <input type="text" class="form-control" placeholder="Responsable">
+                            <input type="text" class="form-control input-large text-center">
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <table class="table table-bordered text-start m-4">
+
+            <table class="table table-bordered text-start mt-3">
                 <thead>
                     <tr>
                         <th class="text-center" colspan="2">SOLUCIÓN</th>
@@ -105,19 +107,19 @@
                 <tbody>
                     <tr>
                         <td colspan="2" class="w-75">
-                            <textarea class=" text form-control" rows="6" placeholder="Escribe la solución aquí..."></textarea>
+                            <textarea class=" text form-control text-center" rows="7"></textarea>
                         </td>
                         <td>
                             <input type="date" class="form-control mb-2">
-                            <input type="text" class="form-control" placeholder="Responsable">
+                            <input type="text" class="form-control input-large text-center">
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <div class="m-3">
+            <div class="mt-5 mb-1">
                 <h2 class="text-center">Entrega</h2>
             </div>
-            <table class="table table-bordered text-start m-4">
+            <table class="table table-bordered text-start">
                 <thead>
                     <tr>
                         <th class="text-center" colspan="2">RECOMENDACIONES</th>
@@ -127,11 +129,11 @@
                 <tbody>
                     <tr>
                         <td colspan="2" class="w-75">
-                            <textarea class=" text form-control" rows="6"></textarea>
+                            <textarea class=" text form-control text-center" rows="7"></textarea>
                         </td>
                         <td>
-                            
                             <input type="date" class="form-control mb-2">
+                            <input type="text" class="form-control input-large text-center">
                         </td>
                     </tr>
                 </tbody>
@@ -143,8 +145,27 @@
 <style>
 .form-control {
     border-color: #878888;
+    resize: none;
 }
 .text {
     border: none;
 }
+.row {
+    width: 60%;
+}
+.order {
+    margin-top: 15%;
+}
+.input {
+    margin-top: 15%;
+}
+.input-large {
+    grid-row: span 2; /* Hace que el input ocupe dos filas */
+    height: 100px; /* Ajusta la altura según necesidad */
+    border: none;
+}
+.table {
+    border-color: #878888;
+}
+
 </style>
