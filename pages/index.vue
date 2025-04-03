@@ -42,6 +42,11 @@
 </template>
 
 <script setup>
+
+definePageMeta({
+    layout : "empty"
+})
+
 const toggleInputPassword = () => {
     const input = document.getElementById("password");
     const button = document.getElementById("password-button");
