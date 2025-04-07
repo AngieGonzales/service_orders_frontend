@@ -4,7 +4,7 @@
             <font-awesome-icon :icon="['fas', 'clipboard-list']" style="color: #ffffff;" class="icon" />
         </div>
         <div class="col-10 header d-flex align-items-center">
-            <h1 class="title text-white">SERVICE ORDERS</h1>
+            <h1 class="title text-white">ORDENES DE SERVICIO</h1>
         </div>
     </div>
     <slot/>

@@ -10,7 +10,7 @@
                     <img src="../public/user.png" alt="" class="image" />
                 </div>
                 <div>
-                    <h2 class="message text-white text-center">Welcome to the Service Orders System</h2>
+                    <h2 class="message text-white text-center">Bienvenido al sistema de ordenes de servicio</h2>
                 </div>
             </div>
 
@@ -19,13 +19,13 @@
                 <form action="#" class="form">
                 <div class="md-4">
                     <label for="email" class="form-label fw-bold">Correo Electrónico</label>
-                    <input type="email" class="form-control p-3 mb-4 shadow" name="email" id="email" placeholder="Enter your  email"/>
+                    <input type="email" class="form-control p-3 mb-4 shadow" name="email" id="email" placeholder="Ingrese su email"/>
                 </div>
 
                 <div class="md-4 position-relative">
                     <label for="password" class="form-label fw-bold">Contraseña</label>
                     <div class="input-group shadow rounded">
-                        <input id="password" type="password" class="form-control border-end-0 p-3" name="password" placeholder="Enter your password" required/>
+                        <input id="password" type="password" class="form-control border-end-0 p-3" name="password" placeholder="Ingrese su contraseña" required/>
                         <span class="input-group-text bg-transparent border border-start-0 pe-3" @click="toggleInputPassword">
                             <i class="fas fa-eye"></i>
                         </span>
