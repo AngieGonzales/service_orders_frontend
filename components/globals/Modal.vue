@@ -12,7 +12,7 @@
                 <slot name="body" />
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" @click="closeModal">Cancelar</button>
+                <button type="button" class="btn btn-danger" @click="closeModal">Cancelar</button>
                 <slot name="footer" />
             </div>
         </div>
@@ -23,7 +23,6 @@
 <script setup>
 
 import {onMounted, watch} from 'vue'
-import {defineEmits} from 'vue'
 import { Modal } from 'bootstrap'
 
 const props = defineProps({

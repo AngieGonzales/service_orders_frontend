@@ -99,6 +99,24 @@
                             </tr>
                         </tbody>
                     </table>
+                    <table class="table table-bordered text-start mt-3" v-if="isEditing">
+                        <thead>
+                            <tr>
+                                <th class="text-center" colspan="2">SOLUCIÓN</th>
+                                <th class="text-center">Responsable</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="w-75">
+                                    <textarea class="text form-control text-center" rows="7" v-model="selectedOrder.solution"></textarea>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-large text-center" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <div class="mt-5 mb-1">
                         <h2 class="text-center">Entrega</h2>
                     </div>
@@ -143,6 +161,7 @@ const props = defineProps({
     }
 })
 
+
 const selectedOrder = ref({})
 
 watch(() => props.order, (newOrder) => {
@@ -157,5 +176,5 @@ watch(() => props.order, (newOrder) => {
     }
 }, { immediate: true })
 
-
+const isEditing = computed(() => !!props.order?.number)
 </script>

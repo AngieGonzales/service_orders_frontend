@@ -9,7 +9,7 @@ export const useServiceOrders = () => {
       type: "garantía",
       part_number: "ab123",
       serial_number: "6303934",
-      description: "lorem ipsum",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui expedita temporibus ipsum, incidunt hic doloremque a voluptas magnam perferendis architecto harum, obcaecati adipisci ea recusandae. Veniam eveniet a quidem sequi?",
       solution: "lorem ipsum",
       company: { name: "Tech Solutions S.A.S", headquarters: "Bogota" },
       contacts: { name: "Angie", last_name: "Gonzales", gender: "Femenino", active: true, identification: "1101532654", charge: "admin", birthday: "09/12/2005" },
