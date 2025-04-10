@@ -6,12 +6,15 @@
                     <img src="../public/user.png" alt="" class="image" />
                 </div>
                 <div>
-                    <h2 class="message text-white text-center">Bienvenido al sistema de ordenes de servicio</h2>
+                    <h2 class="message text-white text-center">Bienvenido</h2>
+                </div>
+                <div class="msg">
+                    <h2 class="message text-white text-center">Sistema de ordenes de servicio</h2>
                 </div>
             </div>
 
             <div class="col h-75">
-                <h2 class="title fw-bold text-center mb-5">BIENVENIDO</h2>
+                <h2 class="title fw-bold text-center mb-5 fs-2">BIENVENIDO</h2>
                 <form action="#" class="form">
                 <div class="md-4">
                     <label for="email" class="form-label fw-bold">Correo Electrónico</label>
@@ -72,6 +75,9 @@ const toggleInputPassword = () => {
 }
 .message {
     font-family: "Boldonse";
+}
+.msg {
+    margin-top: 35%;
 }
 .form-label {
     color: #868a89;
