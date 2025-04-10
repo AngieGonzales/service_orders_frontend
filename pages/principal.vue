@@ -1,7 +1,9 @@
 <template>
 <ServiceOrderModal :order="selectedOrder" v-if="flags.showServiceOrderModal" @exit="flags.showServiceOrderModal=false;openModal(true)" />
+<OrderDetailModal :order="selectedOrder" v-if="flags.showOrderDetailModal" @exit="flags.showOrderDetailModal = false"/>
+<div class="border border-1 m-2">
 <div class="container-fluid">
-    <div class="row w-100 p-2 mt-4">
+    <div class="row w-100 p-2 mt-4 d-flex justify-content-around">
         <div class="col-3">
             <label for="client" class="form-label">Cliente:</label>
             <input type="text" id="client" class="form-control">
@@ -58,7 +60,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="#" @click="OrderDetails(order)">
                                         <img src="../public/circle-info-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px;">
                                         Detalles
                                     </a>
@@ -71,10 +73,12 @@
         </table>
     </div>
 </div>
+</div>
 </template>
 
 <script setup>
 import ServiceOrderModal from '~/components/ServiceOrderModal.vue'
+import OrderDetailModal from '~/components/OrderDetailModal.vue'
 
 import {useServiceOrders} from '@/composables/useServiceOrders'
 
@@ -86,7 +90,10 @@ function editOrder(order) {
     selectedOrder.value = { ...order } 
     flags.value.showServiceOrderModal = true
 }
-
+function OrderDetails(order) {
+    selectedOrder.value = { ...order }
+    flags.value.showOrderDetailModal = true
+}
 </script>
 
 <style scoped>

@@ -2,21 +2,18 @@
 <div>
     <Modal @close="$emit('exit')" :closeModalGlobal='closeModal' btnCancelText="Salir">
         <template v-slot:header>
-            Título
+            Crear orden de servicio:
         </template>
 
         <template v-slot:body>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="row">
-                    <div class="col-8">
-                        <img src="../public/haslogo.png" alt="" class="w-50" />
-                    </div>
-                    <div class="col-4 d-flex m-auto">
-                        <h3 class="order ms-5">N° ORDEN</h3>
+                    <div class="col-4 d-flex">
+                        <h3 class="order">N° orden:</h3>
                         <input type="text" class="input form-control w-25 ms-2" v-model="selectedOrder.number" />
                     </div>
 
-                    <div class="col-12 form-floating mt-5 mb-2">
+                    <div class="col-12 form-floating mt-3 mb-2">
                         <input type="text" id="company" class="form-control w-100" placeholder="" v-model="selectedOrder.company.name" />
                         <label for="company" class="form-label fw-bold ms-2">EMPRESA</label>
                     </div>
@@ -88,7 +85,7 @@
                                 <th class="text-center" colspan="2">
                                     DESCRIPCION DEL ESTADO EN EL QUE SE RECIBE
                                 </th>
-                                <th class="text-center">Fecha y Responsable</th>
+                                <th class="text-center">Responsable</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,27 +94,7 @@
                                     <textarea class="text form-control text-center" rows="7" v-model="selectedOrder.description"></textarea>
                                 </td>
                                 <td>
-                                    <input type="date" class="form-control mb-2" />
-                                    <input type="text" class="form-control input-large text-center" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-bordered text-start mt-3">
-                        <thead>
-                            <tr>
-                                <th class="text-center" colspan="2">SOLUCIÓN</th>
-                                <th class="text-center">Fecha y Responsable</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2" class="w-75">
-                                    <textarea class="text form-control text-center" rows="7" v-model="selectedOrder.solution"></textarea>
-                                </td>
-                                <td>
-                                    <input type="date" class="form-control mb-2" />
-                                    <input type="text" class="form-control input-large text-center" />
+                                    <input type="text" class="form-control input-large text-center"/>
                                 </td>
                             </tr>
                         </tbody>
@@ -129,7 +106,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center" colspan="2">RECOMENDACIONES</th>
-                                <th class="text-center">Firma y Fecha</th>
+                                <th class="text-center">Responsable</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -138,7 +115,6 @@
                                     <textarea class="text form-control text-center" rows="7" v-model="selectedOrder.delivery_conditions.description"></textarea>
                                 </td>
                                 <td>
-                                    <input type="date" class="form-control mb-2" />
                                     <input type="text" class="form-control input-large text-center" />
                                 </td>
                             </tr>
@@ -156,7 +132,7 @@
 </template>
 
 <script setup>
-import {defineAsyncComponent,defineProps,ref, onMounted} from 'vue';
+import {defineAsyncComponent,ref} from 'vue';
 
 const closeModal = ref(false)
 const Modal = defineAsyncComponent(() => import('@/components/globals/Modal.vue'))
