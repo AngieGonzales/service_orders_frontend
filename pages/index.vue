@@ -1,8 +1,4 @@
 <template>
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-    </head>
-
     <div class="container d-flex justify-content-center">
         <div class="row mt-5 w-75 shadow-lg">
             <div class="col bg rounded-4">
@@ -33,7 +29,7 @@
                 </div>
 
                 <div class="d-grid mt-5">
-                    <button type="submit" class="btn p-3 text-white fw-bold">Acceder</button>
+                    <button type="submit" class="btn p-3 text-white fw-bold" >Acceder</button>
                 </div>
                 </form>
             </div>
