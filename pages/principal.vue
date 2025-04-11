@@ -1,7 +1,8 @@
 <template>
 <ServiceOrderModal :order="selectedOrder" v-if="flags.showServiceOrderModal" @exit="flags.showServiceOrderModal=false;openModal(true)" />
-<OrderDetailModal :order="selectedOrder" v-if="flags.showOrderDetailModal" @exit="flags.showOrderDetailModal = false"/>
-<div class="border border-1 m-2">
+<OrderDetailModal :order="selectedOrder" v-if="flags.showOrderDetailModal" @exit="flags.showOrderDetailModal = false;openModal(true)"/>
+<ServiceSolutionModal :order="selectedOrder" v-if="flags.showSolutionModal" @exit="flags.showSolutionModal = false;openModal(true)" @save="updateSolution"/>
+<div class="border border-1 m-2 shadow shadow-lg">
 <div class="container-fluid">
     <div class="row w-100 p-2 mt-4 d-flex justify-content-around">
         <div class="col-3">
@@ -59,10 +60,16 @@
                                         Editar
                                     </a>
                                 </li>
-                                <li>
+                                <li class="border-bottom">
                                     <a class="dropdown-item" href="#" @click="OrderDetails(order)">
                                         <img src="../public/circle-info-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px;">
                                         Detalles
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" @click="SolutionModal(order)">
+                                        <img src="../public/tag-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px;">
+                                        Solución
                                     </a>
                                 </li>
                             </ul>
@@ -93,6 +100,15 @@ function editOrder(order) {
 function OrderDetails(order) {
     selectedOrder.value = { ...order }
     flags.value.showOrderDetailModal = true
+}
+
+function SolutionModal(order) {
+    selectedOrder.value = order
+    flags.value.showSolutionModal = true
+}
+
+const updateSolution = () => {
+    
 }
 </script>
 

@@ -99,7 +99,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table table-bordered text-start mt-3" v-if="isEditing">
+                    <table class="table table-bordered text-start mt-3" v-if="showSolution">
                         <thead>
                             <tr>
                                 <th class="text-center" colspan="2">SOLUCIÓN</th>
@@ -150,7 +150,7 @@
 </template>
 
 <script setup>
-import {defineAsyncComponent,ref} from 'vue';
+import {defineAsyncComponent,ref, onMounted} from 'vue';
 
 const closeModal = ref(false)
 const Modal = defineAsyncComponent(() => import('@/components/globals/Modal.vue'))
@@ -161,6 +161,12 @@ const props = defineProps({
     }
 })
 
+
+onMounted(() => {
+    console.log('ola', props.order);
+    console.log('solution', showSolution.value);
+    
+})
 
 const selectedOrder = ref({})
 
@@ -176,5 +182,5 @@ watch(() => props.order, (newOrder) => {
     }
 }, { immediate: true })
 
-const isEditing = computed(() => !!props.order?.number)
+const showSolution = computed(() => !!props.order?.id)
 </script>
