@@ -28,7 +28,7 @@ import { Modal } from 'bootstrap'
 const props = defineProps({
     maxWidth: {
         type: String,
-        default: 'lg'
+        default: 'xl'
     },
     closeModalGlobal: Boolean
 })

@@ -6,138 +6,111 @@
         </template>
 
         <template v-slot:body>
-            <div class="d-flex justify-content-center align-items-center">
+            <div >
                 <div class="row">
-                    <div class="col-4 d-flex">
-                        <h3 class="order">N° orden:</h3>
-                        <input type="text" class="input form-control w-25 ms-2" v-model="selectedOrder.number" />
+                    <div class="mb-3 col-2">
+                        <label for="number" class="font form-label fw-bold">N° orden:</label>
+                        <input type="email" id="number" class="form-control" v-model="selectedOrder.number">
                     </div>
 
-                    <div class="col-12 form-floating mt-3 mb-2">
-                        <input type="text" id="company" class="form-control w-100" placeholder="" v-model="selectedOrder.company.name" />
-                        <label for="company" class="form-label fw-bold ms-2">EMPRESA</label>
+                    <div class="mb-3 col-6 ">
+                        <label for="company" class="font form-label fw-bold">Empresa:</label>
+                        <input type="text" id="company" class="form-control" v-model="selectedOrder.company.name" />
                     </div>
-                    <div class="col-12 form-floating mb-2">
-                        <input type="text" id="sede" class="form-control" placeholder="" v-model="selectedOrder.company.headquarters" />
-                        <label for="sede" class="form-label fw-bold ms-2">SEDE</label>
+
+                    <div class="col-4 mb-3">
+                        <label for="sede" class="font form-label fw-bold">Sede:</label>
+                        <input type="text" id="sede" class="form-control" v-model="selectedOrder.company.headquarters" />
                     </div>
-                    <div class="col-6 form-floating mb-2">
-                        <input type="text" id="address" class="form-control w-100" placeholder="" v-model="selectedOrder.addresses.address" />
-                        <label for="address" class="form-label fw-bold ms-2">DIRECCION</label>
+
+                    <div class="col-4 mb-3">
+                        <label for="address" class="font form-label fw-bold">Dirección:</label>
+                        <input type="text" id="address" class="form-control w-100" v-model="selectedOrder.addresses.address" />
                     </div>
-                    <div class="col-6 form-floating mb-2">
-                        <input type="text" id="city" class="form-control w-100" placeholder="" v-model="selectedOrder.cities.city" />
-                        <label for="city" class="form-label fw-bold ms-2">CIUDAD</label>
+
+                    <div class="col-3 mb-3">
+                        <label for="city" class="font form-label fw-bold">Ciudad:</label>
+                        <input type="text" id="city" class="form-control" v-model="selectedOrder.cities.city" />
                     </div>
-                    <div class="col-6 form-floating mb-2">
-                        <input type="text" id="contact" class="form-control" placeholder="" v-model="selectedOrder.contacts.name" />
-                        <label for="contact" class="form-label fw-bold ms-2">CONTACTO</label>
+                    <div class="col-5 mb-3">
+                        <label for="contact" class="font form-label fw-bold">Contacto:</label>
+                        <input type="text" id="contact" class="form-control" v-model="selectedOrder.contacts.name" />
                     </div>
-                    <div class="col-6 form-floating mb-2">
-                        <input type="text" id="cc" class="form-control" placeholder="" v-model="selectedOrder.contacts.identification" />
-                        <label for="cc" class="form-label fw-bold ms-2">C.C</label>
+
+                    <div class="col-2 mb-3">
+                        <label for="cc" class="font form-label fw-bold">C.C</label>
+                        <input type="text" id="cc" class="form-control" v-model="selectedOrder.contacts.identification" />
                     </div>
-                    <div class="col-3 form-floating mb-2">
-                        <input type="text" id="cel" class="form-control" placeholder="" v-model="selectedOrder.phones.phone" />
-                        <label for="cel" class="form-label fw-bold ms-2">TELEFONO</label>
+
+                    <div class="col-3 mb-3">
+                        <label for="cel" class="font form-label fw-bold">Teléfono:</label>
+                        <input type="text" id="cel" class="form-control" v-model="selectedOrder.phones.phone" />
                     </div>
-                    <div class="col-3 form-floating mb-2">
-                        <input type="text" id="cell" class="form-control" placeholder="" v-model="selectedOrder.phones.phone" />
-                        <label for="cell" class="form-label fw-bold ms-2">CELULAR</label>
+
+                    <div class="col-3 mb-3">
+                        <label for="cell" class="font form-label fw-bold">Celular:</label>
+                        <input type="text" id="cell" class="form-control" v-model="selectedOrder.phones.phone" />
                     </div>
-                    <div class="col-6 form-floating">
-                        <input type="email" id="email" class="form-control" placeholder="" v-model="selectedOrder.mails.mail" />
-                        <label for="email" class="form-label fw-bold ms-2">MAIL</label>
+
+                    <div class="col-4 mb-3">
+                        <label for="email" class="font form-label fw-bold">Email:</label>
+                        <input type="email" id="email" class="form-control" v-model="selectedOrder.mails.mail" />
                     </div>
 
                     <div class="mt-5 mb-1">
-                        <h2 class="text-center">Información del servicio</h2>
+                        <label class="form-label fw-bold">Información del servicio</label>
+                        <hr>
                     </div>
-                    <table class="table table-bordered text-start">
-                        <thead>
-                            <tr>
-                                <th class="text-center" colspan="2">TIPO DE SERVICIO</th>
-                                <th class="text-center">N° PARTE</th>
-                                <th class="text-center">NOMBRE DEL EQUIPO</th>
-                                <th class="text-center">N° SERIE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2" class="w-50">
-                                    <textarea class="text form-control text-center" rows="3" v-model="selectedOrder.type"></textarea>
-                                </td>
-                                <td>
-                                    <textarea class="text form-control text-center" rows="3" v-model="selectedOrder.part_number"></textarea>
-                                </td>
-                                <td>
-                                    <textarea class="text form-control text-center" rows="3" v-model="selectedOrder.equipment_types.name"></textarea>
-                                </td>
-                                <td>
-                                    <textarea class="text form-control text-center" rows="3" v-model="selectedOrder.serial_number"></textarea>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-bordered text-start mt-3">
-                        <thead>
-                            <tr>
-                                <th class="text-center" colspan="2">
-                                    DESCRIPCION DEL ESTADO EN EL QUE SE RECIBE
-                                </th>
-                                <th class="text-center">Responsable</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2" class="w-75">
-                                    <textarea class="text form-control text-center" rows="7" v-model="selectedOrder.description"></textarea>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control input-large text-center"/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-bordered text-start mt-3" v-if="showSolution">
-                        <thead>
-                            <tr>
-                                <th class="text-center" colspan="2">SOLUCIÓN</th>
-                                <th class="text-center">Responsable</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2" class="w-75">
-                                    <textarea class="text form-control text-center" rows="7" v-model="selectedOrder.solution"></textarea>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control input-large text-center" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="col-4 mb-3">
+                        <label for="type" class="font form-label fw-bold">Tipo de servicio:</label>
+                        <input type="text" id="type" class="form-control" v-model="selectedOrder.type" />
+                    </div>
+                    <div class="col-2 mb-3">
+                        <label for="partNumber" class="font form-label fw-bold">Número de parte:</label>
+                        <input type="text" id="partNumber" class="form-control" v-model="selectedOrder.part_number" />
+                    </div>
+                    <div class="col-4 mb-3">
+                        <label for="contact" class="font form-label fw-bold">Nombre equipo:</label>
+                        <input type="text" id="contact" class="form-control" v-model="selectedOrder.equipment_types.name" />
+                    </div>
+                    <div class="col-2 mb-3">
+                        <label for="serialNumber" class="font form-label fw-bold">Número de serie:</label>
+                        <input type="text" id="serialNumber" class="form-control" v-model="selectedOrder.serial_number" />
+                    </div>
+                    
+                    <div class="col-9 mb-3">
+                        <label for="floatingTextarea" class="font form-label fw-bold">Descripción:</label>
+                        <textarea class="form-control" placeholder="Ingrese aqui la descripción del estado en el que se recibe el equipo" rows="5" id="floatingTextarea"></textarea>
+                    </div>
+
+                    <div class="col-3 mb-3">
+                        <label for="responsable" class="font form-label fw-bold">Responsable:</label>
+                        <input type="text" id="responsable" class="form-control" />
+                    </div>
+
+                    <div v-if="showSolution" class="row">
+                        <div class="col-9 mb-3">
+                            <label for="solution" class="font form-label fw-bold">Solución:</label>
+                            <textarea class="form-control" rows="5" id="solution"></textarea>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
+                            <input type="text" id="responsable2" class="form-control" />
+                        </div>
+                    </div>
                     <div class="mt-5 mb-1">
-                        <h2 class="text-center">Entrega</h2>
+                        <label class="form-label fw-bold">Entrega</label>
+                        <hr>
                     </div>
-                    <table class="table table-bordered text-start">
-                        <thead>
-                            <tr>
-                                <th class="text-center" colspan="2">RECOMENDACIONES</th>
-                                <th class="text-center">Responsable</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2" class="w-75">
-                                    <textarea class="text form-control text-center" rows="7" v-model="selectedOrder.delivery_conditions.description"></textarea>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control input-large text-center" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="col-9 mb-3">
+                        <label for="solution" class="font form-label fw-bold">Recomendaciones:</label>
+                        <textarea class="form-control" rows="5" id="solution"></textarea>
+                    </div>
+                    <div class="col-3 mb-3">
+                        <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
+                        <input type="text" id="responsable2" class="form-control" />
+                    </div>
+                    
                 </div>
             </div>
         </template> 
@@ -184,3 +157,9 @@ watch(() => props.order, (newOrder) => {
 
 const showSolution = computed(() => !!props.order?.id)
 </script>
+
+<style scoped>
+.font {
+    color: #5d5d5d;
+}
+</style>

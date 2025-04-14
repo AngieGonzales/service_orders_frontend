@@ -7,7 +7,7 @@
 
         <template v-slot:body>
             <div class="space-y-4">
-                <label for="solution" class="form-label">Solución:</label>
+                <label for="solution"class="font form-label fw-bold">Solución:</label>
                 <textarea id="solution" class="w-100 form-control border p-2 rounded" rows="4" placeholder="Describe la solución aquí..."></textarea>
             </div>
         </template>
