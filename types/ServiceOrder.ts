@@ -2,7 +2,6 @@ export interface Company {
     name: string,
     headquarters: string
 }
-
 export interface Contact {
     name: string,
     last_name: string,
@@ -12,31 +11,24 @@ export interface Contact {
     charge: string,
     birthday: string
 }
-
 export interface Email {
     mail: string
 }
-
 export interface Phone {
     phone: number
 }
-
 export interface Address {
     address: string
 }
-
 export interface City {
     city: string
 }
-
 export interface EquipmentType {
     name: string
 }
-
 export interface DeliveryConditions {
     description: string
 }
-
 export interface ServiceOrder {
     id: number,
     number: number,

@@ -80,7 +80,7 @@
                     
                     <div class="col-9 mb-3">
                         <label for="floatingTextarea" class="font form-label fw-bold">Descripción:</label>
-                        <textarea class="form-control" placeholder="Ingrese aqui la descripción del estado en el que se recibe el equipo" rows="5" id="floatingTextarea"></textarea>
+                        <textarea class="form-control" placeholder="Ingrese aqui la descripción del estado en el que se recibe el equipo" rows="5" id="floatingTextarea" v-model="selectedOrder.description"></textarea>
                     </div>
 
                     <div class="col-3 mb-3">
@@ -91,7 +91,7 @@
                     <div v-if="showSolution" class="row">
                         <div class="col-9 mb-3">
                             <label for="solution" class="font form-label fw-bold">Solución:</label>
-                            <textarea class="form-control" rows="5" id="solution"></textarea>
+                            <textarea class="form-control" rows="5" id="solution" v-model="selectedOrder.solution"></textarea>
                         </div>
                         <div class="col-3 mb-3">
                             <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-9 mb-3">
                         <label for="solution" class="font form-label fw-bold">Recomendaciones:</label>
-                        <textarea class="form-control" rows="5" id="solution"></textarea>
+                        <textarea class="form-control" rows="5" id="solution" v-model="selectedOrder.delivery_conditions.description"></textarea>
                     </div>
                     <div class="col-3 mb-3">
                         <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
