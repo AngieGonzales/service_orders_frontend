@@ -1,7 +1,7 @@
 <template>
-<ServiceOrderModal :order="selectedOrder" v-if="flags.showServiceOrderModal" @exit="flags.showServiceOrderModal=false;openModal(true)" />
-<OrderDetailModal :order="selectedOrder" v-if="flags.showOrderDetailModal" @exit="flags.showOrderDetailModal = false;openModal(true)"/>
-<ServiceSolutionModal :order="selectedOrder" v-if="flags.showSolutionModal" @exit="flags.showSolutionModal = false;openModal(true)" @save="updateSolution"/>
+<Order :order="selectedOrder" v-if="flags.showServiceOrderModal" @exit="flags.showServiceOrderModal=false;openModal(true)" />
+<Detail :order="selectedOrder" v-if="flags.showOrderDetailModal" @exit="flags.showOrderDetailModal = false;openModal(true)"/>
+<Solution :order="selectedOrder" v-if="flags.showSolutionModal" @exit="flags.showSolutionModal = false;openModal(true)" @save="updateSolution"/>
 <div class="border border-1 m-2 shadow shadow-lg">
 <div class="container-fluid">
     <div class="row w-100 p-2 mt-4 d-flex justify-content-around">
@@ -51,24 +51,24 @@
                     <td>
                         <div class="btn-group dropstart" role="group">
                             <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../public/gear-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px; color: white;">
+                                <img src="../../public/gear-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px; color: white;">
                             </button>
                             <ul class="dropdown-menu">
                                 <li class="border-bottom">
                                     <a class="dropdown-item" href="#" @click="editOrder(order)">
-                                        <img src="../public/pencil-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px;">
+                                        <img src="../../public/pencil-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px;">
                                         Editar
                                     </a>
                                 </li>
                                 <li class="border-bottom">
                                     <a class="dropdown-item" href="#" @click="OrderDetails(order)">
-                                        <img src="../public/circle-info-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px;">
+                                        <img src="../../public/circle-info-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px;">
                                         Detalles
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="#" @click="SolutionModal(order)">
-                                        <img src="../public/tag-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px;">
+                                        <img src="../../public/tag-solid.svg" alt="" style="width: 16px; height: 16px; margin-right: 5px;">
                                         Solución
                                     </a>
                                 </li>
@@ -84,8 +84,9 @@
 </template>
 
 <script setup>
-import ServiceOrderModal from '~/components/ServiceOrderModal.vue'
-import OrderDetailModal from '~/components/OrderDetailModal.vue'
+import Order from '~/pages/serviceorders/order.vue'
+import Detail from '~/pages/serviceorders/detail.vue'
+import Solution from '~/pages/serviceorders/solution.vue'
 
 import {useServiceOrders} from '@/composables/useServiceOrders'
 
