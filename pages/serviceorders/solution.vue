@@ -23,7 +23,7 @@
 import {defineAsyncComponent,ref} from 'vue';
 
 const closeModal = ref(false)
-const Modal = defineAsyncComponent(() => import('@/components/globals/Modal.vue'))
+const Modal = defineAsyncComponent(() => import('~/components/Modal.vue'))
 
 defineProps ({
     order: Object

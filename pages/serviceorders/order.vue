@@ -1,6 +1,6 @@
 <template>
 <div>
-    <Modal @close="$emit('exit')" :closeModalGlobal='closeModal' btnCancelText="Salir">
+    <Modal @close="$emit('exit')" size="xl" :closeModalGlobal='closeModal' btnCancelText="Salir">
         <template v-slot:header>
             Crear orden de servicio:
         </template>
@@ -126,7 +126,7 @@
 import {defineAsyncComponent,ref, onMounted} from 'vue';
 
 const closeModal = ref(false)
-const Modal = defineAsyncComponent(() => import('@/components/globals/Modal.vue'))
+const Modal = defineAsyncComponent(() => import('~/components/Modal.vue'))
 
 const props = defineProps({
     order: {
@@ -135,11 +135,7 @@ const props = defineProps({
 })
 
 
-onMounted(() => {
-    console.log('ola', props.order);
-    console.log('solution', showSolution.value);
-    
-})
+
 
 const selectedOrder = ref({})
 
