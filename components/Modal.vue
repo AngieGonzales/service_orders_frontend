@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true"
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" 
         data-bs-keyboard="false">
         <div :class="`modal-dialog modal-${size} modal-dialog-scrollable`">
             <div class="modal-content">
@@ -7,7 +7,7 @@
                     <h4 class="modal-title" id="modal">
                         <slot name="header" />
                     </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" 
                         @click="closeModal"></button>
                 </div>
                 <div class="modal-body">
