@@ -91,11 +91,12 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import Order from '~/pages/serviceorders/order.vue'
 import Detail from '~/pages/serviceorders/detail.vue'
 import Solution from '~/pages/serviceorders/solution.vue'
+import type { ServiceOrder } from '~/types/ServiceOrder'
 
 import { useServiceOrders } from '@/composables/useServiceOrders'
 
@@ -107,16 +108,16 @@ const flags = ref({
     showSolutionModal: false
 })
 
-function editOrder(order) {
+function editOrder(order: ServiceOrder) {
     selectedOrder.value = { ...order }
     flags.value.showServiceOrderModal = true
 }
-function OrderDetails(order) {
+function OrderDetails(order: ServiceOrder) {
     selectedOrder.value = { ...order }
     flags.value.showOrderDetailModal = true
 }
 
-function SolutionModal(order) {
+function SolutionModal(order: ServiceOrder) {
     selectedOrder.value = order
     flags.value.showSolutionModal = true
 }

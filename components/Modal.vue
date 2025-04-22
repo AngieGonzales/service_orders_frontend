@@ -35,7 +35,9 @@ const props = withDefaults(defineProps<Props>(), {
     size: 'lg',
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits<{
+    (e: 'close'): void
+}>()
 
 const closeModal = () => {
     const modalEl = document.getElementById('modal')
