@@ -73,11 +73,18 @@
                                                 Detalles
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="border-bottom">
                                             <a class="dropdown-item" href="#" @click="SolutionModal(order)">
                                                 <img src="../../public/tag-solid.svg" alt=""
                                                     style="width: 16px; height: 16px; margin-right: 5px;">
                                                 Solución
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#"">
+                                                <img src="../../public/eraser-solid.svg" alt=""
+                                                    style="width: 16px; height: 16px; margin-right: 5px;">
+                                                Eliminar
                                             </a>
                                         </li>
                                     </ul>

@@ -1,9 +1,7 @@
 <template>
     <div>
         <Modal @close="$emit('exit')" size="xl" :closeModalGlobal='closeModal' btnCancelText="Salir">
-            <template v-slot:header>
-                Crear orden de servicio:
-            </template>
+            <template v-slot:header>{{ modalTitle }}</template>
 
             <template v-slot:body>
                 <div>
@@ -121,30 +119,40 @@
                             <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
                             <input type="text" id="responsable2" class="form-control" />
                         </div>
-
+                        <div class="col-12">
+                            <input type="file" class="form-control">
+                        </div>
                     </div>
                 </div>
             </template>
 
             <template v-slot:footer>
-                <button type="button" class="btn btn-success">Success</button>
+                <button type="button" class="btn btn-success">{{ actionButtonText }}</button>
             </template>
         </Modal>
     </div>
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, ref } from 'vue';
+import { defineAsyncComponent, ref, computed } from 'vue';
 import type { ServiceOrder } from '~/types/ServiceOrder';
 
 const closeModal = ref(false)
 const Modal = defineAsyncComponent(() => import('~/components/Modal.vue'))
 
-const props = defineProps < ({
+const props = defineProps<({
     order?: ServiceOrder
-}) > ()
+})>()
 
-const selectedOrder = ref < ServiceOrder > ({ //Agregar todas las propiedades xq typescript espera un ServiceOrder con todas las propiedades
+const actionButtonText = computed(() => {
+    return props.order && props.order.id !== 0 ? 'Actualizar' : 'Guardar';
+});
+
+const modalTitle = computed(() => {
+    return props.order && props.order.id !== 0 ? 'Editar orden de servicio:' : 'Crear orden de servicio:';
+});
+
+const selectedOrder = ref<ServiceOrder>({ //Agregar todas las propiedades xq typescript espera un ServiceOrder con todas las propiedades
     id: 0,
     number: 0,
     type: '',
