@@ -23,6 +23,7 @@
     "@nuxt/ui": "^3.0.2",
     "@popperjs/core": "^2.11.8",
     "@unhead/vue": "^2.0.2",
+    "axios": "^1.9.0",
     "bootstrap": "^5.3.3",
     "eslint": "^9.23.0",
     "nuxt": "^3.16.1",
