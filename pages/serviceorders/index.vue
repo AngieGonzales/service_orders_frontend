@@ -107,9 +107,9 @@ import type { ServiceOrder } from '~/types/ServiceOrder'
 
 import { useServiceOrders } from '@/composables/useServiceOrders'
 
-definePageMeta({
-    middleware: 'auth' //Middleware para proteger esta ruta
-})
+// definePageMeta({
+//     middleware: 'auth' //Middleware para proteger esta ruta
+// })
 
 const { serviceOrders, selectedOrder, openModal } = useServiceOrders()
 

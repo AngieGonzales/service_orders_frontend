@@ -44,6 +44,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { ref, watch } from 'vue';
+import { useAuthStore } from '~/stores/auth';
 
 const form = ref({
     email: 'email',

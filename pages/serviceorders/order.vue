@@ -6,9 +6,9 @@
             <template v-slot:body>
                 <div>
                     <div class="row">
-                        <div class="mb-3 col-2">
+                        <div class="mb-3 col-1">
                             <label for="number" class="font form-label fw-bold">N° orden:</label>
-                            <input type="email" id="number" class="form-control" v-model="selectedOrder.number">
+                            <input type="email" id="number" class="form-control" v-model="selectedOrder.number" disabled>
                         </div>
 
                         <div class="mb-3 col-6 ">
@@ -16,11 +16,13 @@
                             <input type="text" id="company" class="form-control" v-model="selectedOrder.company.name" />
                         </div>
 
-                        <div class="col-4 mb-3 form-floating">
+                        <div class="col-5 mb-3 form-group">
                             <label for="sede" class="font form-label fw-bold">Sede:</label>
-                            <select type="text" id="sede" class="form-select"
+                            <select type="text" id="sede" class="selectpicker"
                                 v-model="selectedOrder.company.headquarters" multiple>
                                 <option value="1">Opción 1</option>
+                                <option value="2">Opción 1</option>
+                                <option value="3">Opción 1</option>
                             </select>
                         </div>
 
@@ -107,7 +109,6 @@
                                 <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
                                 <input type="text" id="responsable2" class="form-control" />
                             </div>
-                        </div>
                         <div class="mt-5 mb-1">
                             <label class="form-label fw-bold">Entrega</label>
                             <hr>
@@ -116,6 +117,7 @@
                             <label for="solution" class="font form-label fw-bold">Recomendaciones:</label>
                             <textarea class="form-control" rows="5" id="solution"
                                 v-model="selectedOrder.delivery_conditions.description"></textarea>
+                        </div>
                         </div>
                         <div class="col-3 mb-3">
                             <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
