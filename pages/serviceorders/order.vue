@@ -15,11 +15,12 @@
                             <label for="company" class="font form-label fw-bold">Empresa:</label>
                             <input type="text" id="company" class="form-control" v-model="selectedOrder.company.name" />
                         </div>
+                        
+                        <hr>
 
-                        <div class="col-4 mb-3">
-                            <label for="sede" class="font form-label fw-bold">Sede:</label>
-                            <input type="text" id="sede" class="form-control"
-                                v-model="selectedOrder.company.headquarters" />
+                        <div class="col-3 mb-3">
+                            <label for="city" class="font form-label fw-bold">Ciudad:</label>
+                            <input type="text" id="city" class="form-control" v-model="selectedOrder.cities.city" />
                         </div>
 
                         <div class="col-4 mb-3">
@@ -28,10 +29,8 @@
                                 v-model="selectedOrder.addresses.address" />
                         </div>
 
-                        <div class="col-3 mb-3">
-                            <label for="city" class="font form-label fw-bold">Ciudad:</label>
-                            <input type="text" id="city" class="form-control" v-model="selectedOrder.cities.city" />
-                        </div>
+                        <hr>
+
                         <div class="col-5 mb-3">
                             <label for="contact" class="font form-label fw-bold">Contacto:</label>
                             <input type="text" id="contact" class="form-control"
@@ -59,9 +58,10 @@
                             <input type="email" id="email" class="form-control" v-model="selectedOrder.mails.mail" />
                         </div>
 
+                        <hr>
+
                         <div class="mt-5 mb-1">
                             <label class="form-label fw-bold">Información del servicio</label>
-                            <hr>
                         </div>
                         <div class="col-4 mb-3">
                             <label for="type" class="font form-label fw-bold">Tipo de servicio:</label>
