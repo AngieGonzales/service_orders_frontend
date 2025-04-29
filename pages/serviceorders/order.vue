@@ -16,10 +16,12 @@
                             <input type="text" id="company" class="form-control" v-model="selectedOrder.company.name" />
                         </div>
 
-                        <div class="col-4 mb-3">
+                        <div class="col-4 mb-3 form-floating">
                             <label for="sede" class="font form-label fw-bold">Sede:</label>
-                            <input type="text" id="sede" class="form-control"
-                                v-model="selectedOrder.company.headquarters" />
+                            <select type="text" id="sede" class="form-select"
+                                v-model="selectedOrder.company.headquarters" multiple>
+                                <option value="1">Opción 1</option>
+                            </select>
                         </div>
 
                         <div class="col-4 mb-3">
