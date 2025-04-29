@@ -8,25 +8,20 @@
                     <div class="row">
                         <div class="mb-3 col-1">
                             <label for="number" class="font form-label fw-bold">N° orden:</label>
-                            <input type="email" id="number" class="form-control" v-model="selectedOrder.number" disabled>
+                            <input type="email" id="number" class="form-control" v-model="selectedOrder.number"
+                                disabled>
                         </div>
 
                         <div class="mb-3 col-6 ">
                             <label for="company" class="font form-label fw-bold">Empresa:</label>
-                            <input type="text" id="company" class="form-control" v-model="selectedOrder.company.name" />
-                        </div>
-                        
-                        <hr>
 
-                        <div class="col-5 mb-3 form-group">
-                            <label for="sede" class="font form-label fw-bold">Sede:</label>
-                            <select type="text" id="sede" class="selectpicker"
-                                v-model="selectedOrder.company.headquarters" multiple>
-                                <option value="1">Opción 1</option>
-                                <option value="2">Opción 1</option>
-                                <option value="3">Opción 1</option>
+                            <select id="company" class="form-select">
+                                <option :value="company.id" v-for="company in companies">{{ company.company }}</option>
                             </select>
+
                         </div>
+
+                        <hr>
 
                         <div class="col-4 mb-3">
                             <label for="address" class="font form-label fw-bold">Dirección:</label>
@@ -97,7 +92,12 @@
 
                         <div class="col-3 mb-3">
                             <label for="responsable" class="font form-label fw-bold">Responsable:</label>
-                            <input type="text" id="responsable" class="form-control" />
+
+                            <select id="responsable" class="form-select" aria-label="Default select example">
+                                <option :value="responsable.id" v-for="responsable in responsables">
+                                    {{ responsable.name }}
+                                </option>
+                            </select>
                         </div>
 
                         <div v-if="showSolution" class="row">
@@ -108,21 +108,29 @@
                             </div>
                             <div class="col-3 mb-3">
                                 <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
-                                <input type="text" id="responsable2" class="form-control" />
+                                <select id="responsable" class="form-select" aria-label="Default select example">
+                                    <option :value="responsable.id" v-for="responsable in responsables">
+                                        {{ responsable.name }}
+                                    </option>
+                                </select>
                             </div>
-                        <div class="mt-5 mb-1">
-                            <label class="form-label fw-bold">Entrega</label>
-                            <hr>
-                        </div>
-                        <div class="col-9 mb-3">
-                            <label for="solution" class="font form-label fw-bold">Recomendaciones:</label>
-                            <textarea class="form-control" rows="5" id="solution"
-                                v-model="selectedOrder.delivery_conditions.description"></textarea>
-                        </div>
+                            <div class="mt-5 mb-1">
+                                <label class="form-label fw-bold">Entrega</label>
+                                <hr>
+                            </div>
+                            <div class="col-9 mb-3">
+                                <label for="solution" class="font form-label fw-bold">Recomendaciones:</label>
+                                <textarea class="form-control" rows="5" id="solution"
+                                    v-model="selectedOrder.delivery_conditions.description"></textarea>
+                            </div>
                         </div>
                         <div class="col-3 mb-3">
                             <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
-                            <input type="text" id="responsable2" class="form-control" />
+                            <select id="responsable" class="form-select" aria-label="Default select example">
+                                <option :value="responsable.id" v-for="responsable in responsables">
+                                    {{ responsable.name}}
+                                </option>
+                            </select>
                         </div>
                         <div class="col-12">
                             <input type="file" class="form-control">
@@ -250,6 +258,152 @@ watch(
 )
 
 const showSolution = computed(() => !!props.order?.id)
+
+const responsables = [
+    {
+        "id": "681153412383462ca7c83ae0",
+        "name": "Lindsey Quinn"
+    },
+    {
+        "id": "681153411d9b86c5f67a49b4",
+        "name": "Sherrie Hodges"
+    },
+    {
+        "id": "68115341a436545fa3abf376",
+        "name": "Harriett Benjamin"
+    },
+    {
+        "id": "68115341254e97df8aa64340",
+        "name": "Good Delgado"
+    },
+    {
+        "id": "68115341327a43856907214e",
+        "name": "Elise Gardner"
+    },
+    {
+        "id": "68115341baf983e6d6a58687",
+        "name": "Fanny Green"
+    },
+    {
+        "id": "681153412649cc4459479202",
+        "name": "Margarita Burke"
+    },
+    {
+        "id": "68115341ccd72df661e04b2b",
+        "name": "Reese Hutchinson"
+    },
+    {
+        "id": "6811534183fce2082f1a573a",
+        "name": "Susan Collins"
+    },
+    {
+        "id": "681153417513b3a4be3c6544",
+        "name": "Bird Jensen"
+    },
+    {
+        "id": "68115341b972baa565c67802",
+        "name": "Janet Edwards"
+    },
+    {
+        "id": "68115341a0a540f918053088",
+        "name": "Goodman Bullock"
+    },
+    {
+        "id": "681153417c93ebf21997f063",
+        "name": "Opal Cunningham"
+    },
+    {
+        "id": "681153417a6c5d159f6cd879",
+        "name": "Chandra Langley"
+    },
+    {
+        "id": "68115341c72e2ea71ad01468",
+        "name": "Susanne Mcclure"
+    },
+    {
+        "id": "68115341879e31b1121a7f2f",
+        "name": "Salas Campos"
+    },
+    {
+        "id": "68115341f632cf9d0bb298f5",
+        "name": "Stevens Todd"
+    }
+]
+
+const companies = [
+    {
+        "id": "6811546aa035d0c6c482fdd5",
+        "company": "NEWCUBE"
+    },
+    {
+        "id": "6811546a7dfd00922a8c3e9b",
+        "company": "IZZBY"
+    },
+    {
+        "id": "6811546ae23be49a1a1dfae9",
+        "company": "JUNIPOOR"
+    },
+    {
+        "id": "6811546a34e8c0d5514ad362",
+        "company": "RAMEON"
+    },
+    {
+        "id": "6811546aa8f4feccd3287ae1",
+        "company": "AQUAZURE"
+    },
+    {
+        "id": "6811546acf4e2b704f4b9427",
+        "company": "CYTREK"
+    },
+    {
+        "id": "6811546af079d1d0ab075d5e",
+        "company": "KIGGLE"
+    },
+    {
+        "id": "6811546a11a0a6bd4924e79b",
+        "company": "VITRICOMP"
+    },
+    {
+        "id": "6811546ad002f7dca219e2ef",
+        "company": "LOCAZONE"
+    },
+    {
+        "id": "6811546afba277b7c4119160",
+        "company": "CODAX"
+    },
+    {
+        "id": "6811546a2bd9382c38efd253",
+        "company": "ENDICIL"
+    },
+    {
+        "id": "6811546a1d447657b8115365",
+        "company": "ZENTIA"
+    },
+    {
+        "id": "6811546a3fe4c9fb879d847d",
+        "company": "CUIZINE"
+    },
+    {
+        "id": "6811546a81ff5044423577a6",
+        "company": "ZILLACON"
+    },
+    {
+        "id": "6811546a32e691a43f851896",
+        "company": "VIAGREAT"
+    },
+    {
+        "id": "6811546af73d356ecff66622",
+        "company": "GREEKER"
+    },
+    {
+        "id": "6811546ad8a8363a192233fb",
+        "company": "NIXELT"
+    },
+    {
+        "id": "6811546a735fa58b2da476be",
+        "company": "CENTURIA"
+    }
+]
 </script>
 
 <style scoped>
