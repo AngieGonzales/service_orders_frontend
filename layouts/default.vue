@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" @click="logout()">
                         <img src="../public/right-from-bracket-solid.svg" alt=""
                             style="width: 16px; height: 16px; margin-right: 5px;">
                         Cerrar Sesión
@@ -33,6 +33,19 @@
     </div>
     <slot />
 </template>
+
+<script setup>
+
+
+const api = useApi()
+
+const logout = async ()=>{
+    await api.post('/logout')
+    localStorage.removeItem('access_token')
+    window.location.href = '/'
+}
+
+</script>
 
 
 <style>
