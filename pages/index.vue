@@ -14,7 +14,7 @@
                     <div class="mb-4">
                         <label for="email" class="form-label fw-bold">Correo Electrónico</label>
                         <input type="email" class="form-control p-3 shadow" name="email" id="email"
-                            placeholder="Ingrese su email" v-model="form.email" @change="validateForm" />
+                            placeholder="Ingrese su email" v-model="form.email" @input="validateEmail()" />
                     </div>
 
                     <div class="mb-4 position-relative">
@@ -22,7 +22,7 @@
                         <div class="input-group shadow rounded">
                             <input id="password" type="password" class="form-control border-end-0 p-3" name="password"
                                 placeholder="Ingrese su contraseña" required v-model="form.password"
-                                @change="validateForm" />
+                                @input="validatePassword()" />
                             <span class="input-group-text bg-transparent border border-start-0 pe-3"
                                 @click="toggleInputPassword">
                                 <i class="fas fa-eye"></i>
@@ -31,9 +31,7 @@
                     </div>
 
                     <div class="d-grid mt-4">
-                        <button type="submit" class="btn p-3 text-white fw-bold" @click.prevent="checkLogin"
-                            :disabled="!formFlag">Acceder</button>
-                        {{ formFlag }}
+                        <button type="submit" class="btn p-3 text-white fw-bold" @click.prevent="checkLogin">Acceder</button>
                     </div>
                 </form>
             </div>
@@ -46,8 +44,8 @@ import { useRouter } from 'vue-router';
 import { ref, watch } from 'vue';
 
 const form = ref({
-    email: 'email',
-    password: '1234'
+    email: '',
+    password: ''
 })
 
 const api = useApi()
@@ -56,19 +54,6 @@ definePageMeta({
     layout: "empty"
 })
 
-
-// watch( ()=> form.value.email, async (value, old) => {
-//     console.log('form.email')
-//     if (value) {
-//         validateForm()
-//     }
-// })
-
-// watch( ()=> form.value.password, async (value, old) => {
-//     if (value) {
-//         validateForm()
-//     }
-// })
 
 const toggleInputPassword = () => {
     const input = document.getElementById("password");
@@ -86,38 +71,67 @@ const toggleInputPassword = () => {
 
 const router = useRouter();
 
-const formFlag = ref(false)
+const formFlag = ref(true)
+
+const validateEmail = () => {
+    if (!form.value.email) {
+        alert("El email no puede estar vacío")
+        formFlag.value = false
+        return false
+    }
+
+    formFlag.value = true
+    return true
+}
+
+const validatePassword = () => {
+    if (!form.value.password) {
+        alert("La contraseña no puede estar vacía")
+        formFlag.value = false
+        return false
+    }
+    formFlag.value = true
+    return true
+}
 
 const validateForm = () => {
 
-    if (form.value.email) {
-        alert("El email no puede estar vacío")
-        formFlag.value = false
+    if (!validateEmail()) {
+        return
     }
 
-    if (form.value.password) {
-        alert("La contraseña no puede estar vacía")
-        formFlag.value = false
+    if (!validatePassword()) {
+        return
     }
 
     formFlag.value = true
 }
 
-
-// pendiente 
-// hacer validaciones del formulario
-// Manejar el error del logeo
-// Proteger las rutas cuando no estan autorizadas
-
 const checkLogin = async () => {
+
+    validateForm()
+
+    if (!formFlag.value) {
+        return
+    }
+    
     await api.post('/login', form.value).then(
         (response) => {
             localStorage.setItem('access_token', response.data.access_token)
             window.location.href = '/serviceorders'
         }).catch(
             (error) => {
-                alert(`Validacion Incorrecta: ${error.message}`)
-            })
+
+                if (error.response.data.message) {
+                    alert(`Validacion Incorrecta: ${error.response.data.message}`)
+                }
+                else {
+                    alert(`Validacion Incorrecta`)
+                }
+
+                form.value.email=""
+                form.value.password=""
+        })
 }
 
 </script>
@@ -153,4 +167,4 @@ const checkLogin = async () => {
 }
 </style>onMounted,import type { LazyModalToggleButton } from '#components';
 import type { faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import type { faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import type { faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';registerRuntimeCompiler,
