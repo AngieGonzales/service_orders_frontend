@@ -37,7 +37,7 @@
 
         <div>
             <div class="d-flex justify-content-center">
-                <table class="tableOrder table mt-4 table-striped">
+                <table class="tableOrder table mt-4 table-striped" v-if="orders?.data?.length">
                     <thead>
                         <tr>
                             <th class="bg-danger text-white">N° ORDEN</th>
@@ -47,9 +47,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="order in serviceOrders" :key="order.number">
+                        <tr v-for="order in orders.data" :key="order.id">
                             <td>{{ order.number }}</td>
-                            <td>{{ order.company.name }}</td>
+                            <td>COMPANY NAME</td>
                             <td>{{ order.type }}</td>
                             <td>
                                 <div class="btn-group dropstart" role="group">
@@ -81,7 +81,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#"">
+                                            <a class="dropdown-item" href="#">
                                                 <img src="../../public/eraser-solid.svg" alt=""
                                                     style="width: 16px; height: 16px; margin-right: 5px;">
                                                 Eliminar
@@ -99,7 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Order from '~/pages/serviceorders/order.vue'
 import Detail from '~/pages/serviceorders/detail.vue'
 import Solution from '~/pages/serviceorders/solution.vue'
@@ -136,6 +136,24 @@ function SolutionModal(order: ServiceOrder) {
 const updateSolution = () => {
 
 }
+
+const api = useApi()
+
+const orders = ref<ApiResponse<ServiceOrder[]>>([])
+
+onMounted(async ()=>{
+   orders.value = await getServiceOrders()
+})
+
+interface ApiResponse<T> {
+  data: T;
+}
+
+const getServiceOrders = async (): Promise<ApiResponse<ServiceOrder[]>> => {
+    const response = await api.get('/service-orders')
+    return response
+}
+
 </script>
 
 <style scoped>
