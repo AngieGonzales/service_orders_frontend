@@ -44,5 +44,5 @@ export interface ServiceOrder {
     phones: Phone[],
     addresses: Address[],
     cities: City[],
-    // equipment_types: EquipmentType[],
+    // equipment_types: EquipmentType[]
 }
