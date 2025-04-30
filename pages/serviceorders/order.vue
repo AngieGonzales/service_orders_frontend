@@ -12,75 +12,98 @@
                                 disabled>
                         </div>
 
-                        <div class="mb-3 col-6 ">
+                        <div class="mb-3 col-6">
                             <label for="company" class="font form-label fw-bold">Empresa:</label>
-
-                            <select id="company" class="form-select">
-                                <option :value="company.id" v-for="company in companies">{{ company.company }}</option>
-                            </select>
-
+                            <div class="input-group">
+                                <select id="company" class="form-select">
+                                    <option :value="company.id" v-for="company in companies">{{ company.company }}
+                                    </option>
+                                </select>
+                                <button class="btn" style="background-color: #ec474f;">
+                                    <img src="../../public/plus-solid.svg" alt="" style="width: 20px; height: 20px;">
+                                </button>
+                            </div>
                         </div>
-
-                        <hr>
-
-                        <div class="col-4 mb-3">
+                        <div class="mb-3 col-5">
+                            <label for="company" class="font form-label fw-bold">Sede:</label>
+                            <div class="input-group">
+                                <select id="company" class="form-select">
+                                    <option :value="company.id" v-for="company in companies">{{ company.company }}
+                                    </option>
+                                </select>
+                                <button class="btn" style="background-color: #ec474f;">
+                                    <img src="../../public/plus-solid.svg" alt="" style="width: 20px; height: 20px;">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
                             <label for="address" class="font form-label fw-bold">Dirección:</label>
                             <input type="text" id="address" class="form-control w-100"
-                                v-model="selectedOrder.addresses.address" />
+                                v-model="selectedOrder.addresses.address" disabled />
+                        </div>
+                        <div class="mb-3 col-3">
+                            <label for="company" class="font form-label fw-bold">Contacto:</label>
+                            <div class="input-group" style="height: 7px;">
+                                <select id="company" class="form-select">
+                                </select>
+                                <button class="btn" style="background-color: #ec474f;">
+                                    <img src="../../public/plus-solid.svg" alt="" style="width: 20px; height: 20px;">
+                                </button>
+                            </div>
                         </div>
 
-                        <hr>
-
-                        <div class="col-5 mb-3">
-                            <label for="contact" class="font form-label fw-bold">Contacto:</label>
-                            <input type="text" id="contact" class="form-control"
-                                v-model="selectedOrder.contacts.name" />
-                        </div>
-
-                        <div class="col-2 mb-3">
+                        <div class="col-3 mb-3">
                             <label for="cc" class="font form-label fw-bold">C.C</label>
                             <input type="text" id="cc" class="form-control"
-                                v-model="selectedOrder.contacts.identification" />
+                                v-model="selectedOrder.contacts.identification" disabled />
                         </div>
 
                         <div class="col-3 mb-3">
                             <label for="cel" class="font form-label fw-bold">Teléfono:</label>
-                            <input type="text" id="cel" class="form-control" v-model="selectedOrder.phones.phone" />
+                            <input type="text" id="cel" class="form-control" v-model="selectedOrder.phones.phone"
+                                disabled />
                         </div>
 
                         <div class="col-3 mb-3">
                             <label for="cell" class="font form-label fw-bold">Celular:</label>
-                            <input type="text" id="cell" class="form-control" v-model="selectedOrder.phones.phone" />
+                            <input type="text" id="cell" class="form-control" v-model="selectedOrder.phones.phone"
+                                disabled />
                         </div>
 
                         <div class="col-4 mb-3">
                             <label for="email" class="font form-label fw-bold">Email:</label>
-                            <input type="email" id="email" class="form-control" v-model="selectedOrder.mails.mail" />
+                            <input type="email" id="email" class="form-control" v-model="selectedOrder.mails.mail"
+                                disabled />
                         </div>
-
-                        <hr>
-
-                        <div class="mt-5 mb-1">
+                        <div class="mt-5 mb-3 text-center">
                             <label class="form-label fw-bold">Información del servicio</label>
                         </div>
-                        <div class="col-4 mb-3">
-                            <label for="type" class="font form-label fw-bold">Tipo de servicio:</label>
-                            <input type="text" id="type" class="form-control" v-model="selectedOrder.type" />
+                        <div class="mb-3 col-4 ">
+                            <label for="company" class="font form-label fw-bold">Tipo servicio:</label>
+                            <select id="company" class="form-select">
+                                <option :value="company.id" v-for="company in companies">{{ company.company }}</option>
+                            </select>
                         </div>
-                        <div class="col-2 mb-3">
-                            <label for="partNumber" class="font form-label fw-bold">Número de parte:</label>
-                            <input type="text" id="partNumber" class="form-control"
-                                v-model="selectedOrder.part_number" />
+                        <div class="mb-3 col-2">
+                            <label for="company" class="font form-label fw-bold">N° parte:</label>
+                            <div class="input-group" style="height: 7px;">
+                                <select id="company" class="form-select">
+                                </select>
+                            </div>
                         </div>
                         <div class="col-4 mb-3">
                             <label for="contact" class="font form-label fw-bold">Nombre equipo:</label>
-                            <input type="text" id="contact" class="form-control"
-                                v-model="selectedOrder.equipment_types.name" />
+                            <div class="input-group" style="height: 7px;">
+                                <select id="company" class="form-select">
+                                </select>
+                            </div>
                         </div>
                         <div class="col-2 mb-3">
                             <label for="serialNumber" class="font form-label fw-bold">Número de serie:</label>
-                            <input type="text" id="serialNumber" class="form-control"
-                                v-model="selectedOrder.serial_number" />
+                            <div class="input-group" style="height: 7px;">
+                                <select id="company" class="form-select">
+                                </select>
+                            </div>
                         </div>
 
                         <div class="col-9 mb-3">
@@ -123,14 +146,14 @@
                                 <textarea class="form-control" rows="5" id="solution"
                                     v-model="selectedOrder.delivery_conditions.description"></textarea>
                             </div>
-                        </div>
-                        <div class="col-3 mb-3">
-                            <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
-                            <select id="responsable" class="form-select" aria-label="Default select example">
-                                <option :value="responsable.id" v-for="responsable in responsables">
-                                    {{ responsable.name}}
-                                </option>
-                            </select>
+                            <div class="col-3 mb-3">
+                                <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
+                                <select id="responsable" class="form-select" aria-label="Default select example">
+                                    <option :value="responsable.id" v-for="responsable in responsables">
+                                        {{ responsable.name }}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-12">
                             <input type="file" class="form-control">
