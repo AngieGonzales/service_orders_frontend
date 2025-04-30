@@ -11,6 +11,11 @@
                     <textarea id="solution" class="w-100 form-control border p-2 rounded" rows="4"
                         placeholder="Describe la solución aquí..."></textarea>
                 </div>
+                <div class="space-y-4 mt-4">
+                    <label for="recomendaciones" class="font form-label fw-bold">Recomendacines:</label>
+                    <textarea id="recomendaciones" class="w-100 form-control border p-2 rounded" rows="4"
+                        placeholder="Describe las recomendaciones aquí..."></textarea>
+                </div>
             </template>
 
             <template v-slot:footer>

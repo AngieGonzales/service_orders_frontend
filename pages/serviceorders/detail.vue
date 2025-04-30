@@ -18,7 +18,7 @@
                                 <li class="mb-2 mt-4"><strong style="color: #5d5d5d;">Número Orden: </strong>{{
                                     order.number }}</li>
                                 <li class="mb-2"><strong style="color: #5d5d5d;">Empresa: </strong>{{
-                                    order?.company?.name }}</li> //?: verifica que order y company existan para poder acceder a name
+                                    order?.company?.name }}</li> <!--?: verifica que order y company existan para poder acceder a name--> 
                                 <li class="mb-2"><strong style="color: #5d5d5d;">Sede: </strong>{{
                                     order?.company?.headquarters }}</li>
                                 <li class="mb-2"><strong style="color: #5d5d5d;">Dirección: </strong>{{

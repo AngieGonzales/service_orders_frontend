@@ -38,11 +38,11 @@ export interface ServiceOrder {
     description: string,
     solution: string,
     company: Company,
-    contacts: Contact,
-    mails: Email,
-    phones: Phone,
-    addresses: Address,
-    cities: City,
-    equipment_types: EquipmentType,
     delivery_conditions: DeliveryConditions
+    contacts: Contact[],
+    mails: Email[],
+    phones: Phone[],
+    addresses: Address[],
+    cities: City[],
+    // equipment_types: EquipmentType[],
 }
