@@ -39,7 +39,7 @@
                         <div class="col-3 mb-3">
                             <label for="address" class="font form-label fw-bold">Dirección:</label>
                             <input type="text" id="address" class="form-control w-100"
-                                v-model="selectedOrder.addresses.address" disabled />
+                                v-model="selectedOrder.addresses" disabled />
                         </div>
                         <div class="mb-3 col-3">
                             <label for="company" class="font form-label fw-bold">Contacto:</label>
@@ -55,24 +55,24 @@
                         <div class="col-3 mb-3">
                             <label for="cc" class="font form-label fw-bold">C.C</label>
                             <input type="text" id="cc" class="form-control"
-                                v-model="selectedOrder.contacts.identification" disabled />
+                                v-model="selectedOrder.contacts" disabled />
                         </div>
 
                         <div class="col-3 mb-3">
                             <label for="cel" class="font form-label fw-bold">Teléfono:</label>
-                            <input type="text" id="cel" class="form-control" v-model="selectedOrder.phones.phone"
+                            <input type="text" id="cel" class="form-control" v-model="selectedOrder.phones"
                                 disabled />
                         </div>
 
                         <div class="col-3 mb-3">
                             <label for="cell" class="font form-label fw-bold">Celular:</label>
-                            <input type="text" id="cell" class="form-control" v-model="selectedOrder.phones.phone"
+                            <input type="text" id="cell" class="form-control" v-model="selectedOrder.phones"
                                 disabled />
                         </div>
 
                         <div class="col-4 mb-3">
                             <label for="email" class="font form-label fw-bold">Email:</label>
-                            <input type="email" id="email" class="form-control" v-model="selectedOrder.mails.mail"
+                            <input type="email" id="email" class="form-control" v-model="selectedOrder.mails"
                                 disabled />
                         </div>
                         <div class="mt-5 mb-3 text-center">
