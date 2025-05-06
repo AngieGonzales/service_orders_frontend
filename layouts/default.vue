@@ -14,11 +14,11 @@
             </button>
             <ul class="dropdown-menu">
                 <li class="border-bottom">
-                    <a class="dropdown-item" href="#">
+                    <NuxtLink class="dropdown-item" to="/serviceorders/perfil">
                         <img src="../public/user-solid.svg" alt=""
                             style="width: 16px; height: 16px; margin-right: 5px;">
                         Ver Perfil
-                    </a>
+                    </NuxtLink>
                 </li>
                 <li>
                     <a class="dropdown-item" href="#" @click="logout()">
@@ -35,6 +35,8 @@
 </template>
 
 <script setup>
+import { NuxtLink } from '#components'
+
 
 
 const api = useApi()
