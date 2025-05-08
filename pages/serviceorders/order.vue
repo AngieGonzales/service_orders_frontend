@@ -15,7 +15,8 @@
                         <div class="mb-3 col-6">
                             <label for="company" class="font form-label fw-bold">Empresa:</label>
                             <div class="input-group">
-                                <select id="company" class="form-select" @change="setAddresses($event.target.value)">
+                                <select id="company" class="form-select"
+                                    @change="setAddresses($event.target.value), setContacts($event.target.value)">
                                     <option :value="company.id" v-for="company in companies">{{ company.name }}
                                     </option>
                                 </select>
@@ -26,16 +27,20 @@
                         </div>
                         <div class="col-3 mb-3">
                             <label for="address" class="font form-label fw-bold">Dirección:</label>
-                        
-                            <select id="company" class="form-select">
-                                <option :value="selectedOrder?.addresses" v-for="address in companyAddresses">{{ address.address }}
+
+                            <select id="company" class="form-select" :disabled="!companyAddresses.length">
+                                <option :value="selectedOrder?.addresses" v-for="address in companyAddresses">{{
+            address.address }}
                                 </option>
                             </select>
                         </div>
                         <div class="mb-3 col-3">
                             <label for="company" class="font form-label fw-bold">Contacto:</label>
                             <div class="input-group" style="height: 7px;">
-                                <select id="company" class="form-select">
+                                <select id="contacto" class="form-select" :disabled="!companyContacts?.length"
+                                    @change="changeSelectedContacts($event.target.value)">
+                                    <option :value="contact.id" v-for="contact in companyContacts">{{ contact.name }}
+                                    </option>
                                 </select>
                                 <button class="btn" style="background-color: #ec474f;">
                                     <img src="../../public/plus-solid.svg" alt="" style="width: 20px; height: 20px;">
@@ -45,22 +50,21 @@
 
                         <div class="col-3 mb-3">
                             <label for="cc" class="font form-label fw-bold">C.C</label>
-                            <input type="text" id="cc" class="form-control" v-model="selectedOrder.contacts" disabled />
+                            <input type="text" id="cc" class="form-control" v-model="selectedContact.identification"
+                                disabled />
                         </div>
 
                         <div class="col-3 mb-3">
                             <label for="cel" class="font form-label fw-bold">Teléfono:</label>
-                            <input type="text" id="cel" class="form-control" v-model="selectedOrder.phones" disabled />
-                        </div>
-
-                        <div class="col-3 mb-3">
-                            <label for="cell" class="font form-label fw-bold">Celular:</label>
-                            <input type="text" id="cell" class="form-control" v-model="selectedOrder.phones" disabled />
+                            <select id="contacto" class="form-select" :disabled="!companyContacts?.length">
+                                <option :value="phone.id" v-for="phone in selectedContact.phones">{{ phone.phone }}
+                                </option>
+                            </select>
                         </div>
 
                         <div class="col-4 mb-3">
                             <label for="email" class="font form-label fw-bold">Email:</label>
-                            <input type="email" id="email" class="form-control" v-model="selectedOrder.mails"
+                            <input type="email" id="email" class="form-control" v-model="selectedContact.email"
                                 disabled />
                         </div>
                         <div class="mt-5 mb-3 text-center">
@@ -69,36 +73,27 @@
                         <div class="mb-3 col-4 ">
                             <label for="company" class="font form-label fw-bold">Tipo servicio:</label>
                             <select id="company" class="form-select">
-                                <option :value="company.id" v-for="company in companies">{{ company.company }}</option>
+                                <option :value="service.id" v-for="service in serviceTypes">{{ service.label }}</option>
                             </select>
                         </div>
                         <div class="mb-3 col-2">
-                            <label for="company" class="font form-label fw-bold">N° parte:</label>
-                            <div class="input-group" style="height: 7px;">
-                                <select id="company" class="form-select">
-                                </select>
-                            </div>
+                            <label for="part_number" class="font form-label fw-bold">N° parte:</label>
+                            <input type="text" id="part_number" class="form-control" v-model="selectedOrder.part_number">
                         </div>
                         <div class="col-4 mb-3">
-                            <label for="contact" class="font form-label fw-bold">Nombre equipo:</label>
-                            <div class="input-group" style="height: 7px;">
-                                <select id="company" class="form-select">
-                                </select>
-                            </div>
+                            <label for="equipment_name" class="font form-label fw-bold">Nombre equipo:</label>
+                            <input type="text" id="equipment_name" class="form-control" v-model="selectedOrder.equipment_name">
                         </div>
                         <div class="col-2 mb-3">
-                            <label for="serialNumber" class="font form-label fw-bold">Número de serie:</label>
-                            <div class="input-group" style="height: 7px;">
-                                <select id="company" class="form-select">
-                                </select>
-                            </div>
+                            <label for="serial_number" class="font form-label fw-bold">Número de serie:</label>
+                            <input type="text" id="serial_number" class="form-control" v-model="selectedOrder.serial_number">
                         </div>
 
                         <div class="col-9 mb-3">
-                            <label for="floatingTextarea" class="font form-label fw-bold">Descripción:</label>
+                            <label for="description" class="font form-label fw-bold">Descripción:</label>
                             <textarea class="form-control"
                                 placeholder="Ingrese aqui la descripción del estado en el que se recibe el equipo"
-                                rows="5" id="floatingTextarea" v-model="selectedOrder.description"></textarea>
+                                rows="5" id="description" v-model="selectedOrder.description"></textarea>
                         </div>
 
                         <div class="col-3 mb-3">
@@ -277,11 +272,30 @@ const companies = ref([])
 
 onMounted(() => {
     getCompanies()
+    getResponsables()
 })
 
 const getCompanies = async () => {
+
     const response = await api.get('/companies')
+
     companies.value = response.data
+
+    const id = companies.value.length ? companies.value[0].id : null
+
+    if (id) {
+        setAddresses(id)
+        setContacts(id)
+    }
+
+}
+
+const responsables = ref([])
+
+const getResponsables = async () => {
+
+    const response = await api.get('/contacts', {params:{'role':'responsible'}})
+    responsables.value = response.data
 }
 
 const companyAddresses = ref([])
@@ -289,6 +303,26 @@ const companyAddresses = ref([])
 const setAddresses = (id) => {
     const company = companies.value.find((company) => company.id == id);
     companyAddresses.value = company.addresses
+}
+
+const companyContacts = ref([])
+const selectedContact = ref({})
+const selectedContactId = ref({})
+
+const setContacts = (id) => {
+    const company = companies.value.find((company) => company.id == id);
+    companyContacts.value = company.contacts
+    selectedContactId.value = companyContacts.value.length ? companyContacts.value[0].id : null
+    selectedContact.value = getSelectedContact(selectedContactId)
+}
+
+const changeSelectedContacts = (id) => {
+    selectedContactId.value = id
+    selectedContact.value = getSelectedContact(selectedContactId)
+}
+
+const getSelectedContact = () => {
+    return companyContacts.value.find((contact) => contact.id == selectedContactId.value);
 }
 
 const storeServiceOrder = async () => {
@@ -301,76 +335,91 @@ const updateServiceOrder = async () => {
     //do
 }
 
-const responsables = [
+const serviceTypes = [
     {
-        "id": "681153412383462ca7c83ae0",
-        "name": "Lindsey Quinn"
+        'id': 'garantia',
+        'label': 'Garantia'
     },
     {
-        "id": "681153411d9b86c5f67a49b4",
-        "name": "Sherrie Hodges"
+        'id': 'mantenimiento',
+        'label': 'Mantenimiento'
     },
     {
-        "id": "68115341a436545fa3abf376",
-        "name": "Harriett Benjamin"
+        'id': 'instalacion',
+        'label': 'Instalacion'
     },
-    {
-        "id": "68115341254e97df8aa64340",
-        "name": "Good Delgado"
-    },
-    {
-        "id": "68115341327a43856907214e",
-        "name": "Elise Gardner"
-    },
-    {
-        "id": "68115341baf983e6d6a58687",
-        "name": "Fanny Green"
-    },
-    {
-        "id": "681153412649cc4459479202",
-        "name": "Margarita Burke"
-    },
-    {
-        "id": "68115341ccd72df661e04b2b",
-        "name": "Reese Hutchinson"
-    },
-    {
-        "id": "6811534183fce2082f1a573a",
-        "name": "Susan Collins"
-    },
-    {
-        "id": "681153417513b3a4be3c6544",
-        "name": "Bird Jensen"
-    },
-    {
-        "id": "68115341b972baa565c67802",
-        "name": "Janet Edwards"
-    },
-    {
-        "id": "68115341a0a540f918053088",
-        "name": "Goodman Bullock"
-    },
-    {
-        "id": "681153417c93ebf21997f063",
-        "name": "Opal Cunningham"
-    },
-    {
-        "id": "681153417a6c5d159f6cd879",
-        "name": "Chandra Langley"
-    },
-    {
-        "id": "68115341c72e2ea71ad01468",
-        "name": "Susanne Mcclure"
-    },
-    {
-        "id": "68115341879e31b1121a7f2f",
-        "name": "Salas Campos"
-    },
-    {
-        "id": "68115341f632cf9d0bb298f5",
-        "name": "Stevens Todd"
-    }
 ]
+
+// const responsables = [
+//     {
+//         "id": "681153412383462ca7c83ae0",
+//         "name": "Lindsey Quinn"
+//     },
+//     {
+//         "id": "681153411d9b86c5f67a49b4",
+//         "name": "Sherrie Hodges"
+//     },
+//     {
+//         "id": "68115341a436545fa3abf376",
+//         "name": "Harriett Benjamin"
+//     },
+//     {
+//         "id": "68115341254e97df8aa64340",
+//         "name": "Good Delgado"
+//     },
+//     {
+//         "id": "68115341327a43856907214e",
+//         "name": "Elise Gardner"
+//     },
+//     {
+//         "id": "68115341baf983e6d6a58687",
+//         "name": "Fanny Green"
+//     },
+//     {
+//         "id": "681153412649cc4459479202",
+//         "name": "Margarita Burke"
+//     },
+//     {
+//         "id": "68115341ccd72df661e04b2b",
+//         "name": "Reese Hutchinson"
+//     },
+//     {
+//         "id": "6811534183fce2082f1a573a",
+//         "name": "Susan Collins"
+//     },
+//     {
+//         "id": "681153417513b3a4be3c6544",
+//         "name": "Bird Jensen"
+//     },
+//     {
+//         "id": "68115341b972baa565c67802",
+//         "name": "Janet Edwards"
+//     },
+//     {
+//         "id": "68115341a0a540f918053088",
+//         "name": "Goodman Bullock"
+//     },
+//     {
+//         "id": "681153417c93ebf21997f063",
+//         "name": "Opal Cunningham"
+//     },
+//     {
+//         "id": "681153417a6c5d159f6cd879",
+//         "name": "Chandra Langley"
+//     },
+//     {
+//         "id": "68115341c72e2ea71ad01468",
+//         "name": "Susanne Mcclure"
+//     },
+//     {
+//         "id": "68115341879e31b1121a7f2f",
+//         "name": "Salas Campos"
+//     },
+//     {
+//         "id": "68115341f632cf9d0bb298f5",
+//         "name": "Stevens Todd"
+//     }
+// ]
 
 // const companies = [
 //     {
@@ -452,4 +501,4 @@ const responsables = [
 .font {
     color: #5d5d5d;
 }
-</style>, onMounted
+</style>
