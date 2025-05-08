@@ -5,7 +5,6 @@
 
             <template v-slot:body>
                 <div>
-                    {{ selectedOrder.responsible }}
                     <div class="row">
                         <div class="mb-3 col-1">
                             <label for="number" class="font form-label fw-bold">N° orden:</label>
