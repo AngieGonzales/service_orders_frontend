@@ -5,6 +5,7 @@
 
             <template v-slot:body>
                 <div>
+                    {{ selectedOrder.responsible }}
                     <div class="row">
                         <div class="mb-3 col-1">
                             <label for="number" class="font form-label fw-bold">N° orden:</label>
@@ -15,12 +16,12 @@
                         <div class="mb-3 col-6">
                             <label for="company" class="font form-label fw-bold">Empresa:</label>
                             <div class="input-group">
-                                <select id="company" class="form-select"
+                                <select id="company" class="form-select" v-model="selectedOrder.company_id"
                                     @change="setAddresses($event.target.value), setContacts($event.target.value)">
                                     <option :value="company.id" v-for="company in companies">{{ company.name }}
                                     </option>
                                 </select>
-                                <button class="btn" style="background-color: #ec474f;">
+                                <button class="btn" style="background-color: #ec474f;" disabled>
                                     <img src="../../public/plus-solid.svg" alt="" style="width: 20px; height: 20px;">
                                 </button>
                             </div>
@@ -28,8 +29,8 @@
                         <div class="col-3 mb-3">
                             <label for="address" class="font form-label fw-bold">Dirección:</label>
 
-                            <select id="company" class="form-select" :disabled="!companyAddresses.length">
-                                <option :value="selectedOrder?.addresses" v-for="address in companyAddresses">{{
+                            <select id="company" class="form-select" :disabled="!companyAddresses.length" v-model="selectedOrder.addresses">
+                                <option :value="address.address" v-for="address in companyAddresses">{{
             address.address }}
                                 </option>
                             </select>
@@ -38,7 +39,7 @@
                             <label for="company" class="font form-label fw-bold">Contacto:</label>
                             <div class="input-group" style="height: 7px;">
                                 <select id="contacto" class="form-select" :disabled="!companyContacts?.length"
-                                    @change="changeSelectedContacts($event.target.value)">
+                                    @change="changeSelectedContacts($event.target.value)" v-model="selectedOrder.contacts" >
                                     <option :value="contact.id" v-for="contact in companyContacts">{{ contact.name }}
                                     </option>
                                 </select>
@@ -56,7 +57,7 @@
 
                         <div class="col-3 mb-3">
                             <label for="cel" class="font form-label fw-bold">Teléfono:</label>
-                            <select id="contacto" class="form-select" :disabled="!companyContacts?.length">
+                            <select id="contacto" class="form-select" :disabled="!companyContacts?.length" v-model="selectedOrder.phones">
                                 <option :value="phone.id" v-for="phone in selectedContact.phones">{{ phone.phone }}
                                 </option>
                             </select>
@@ -72,7 +73,7 @@
                         </div>
                         <div class="mb-3 col-4 ">
                             <label for="company" class="font form-label fw-bold">Tipo servicio:</label>
-                            <select id="company" class="form-select">
+                            <select id="company" class="form-select" v-model="selectedOrder.type">
                                 <option :value="service.id" v-for="service in serviceTypes">{{ service.label }}</option>
                             </select>
                         </div>
@@ -99,7 +100,7 @@
                         <div class="col-3 mb-3">
                             <label for="responsable" class="font form-label fw-bold">Responsable:</label>
 
-                            <select id="responsable" class="form-select" aria-label="Default select example">
+                            <select id="responsable" class="form-select" aria-label="Default select example" v-model="selectedOrder.responsible">
                                 <option :value="responsable.id" v-for="responsable in responsables">
                                     {{ responsable.name }}
                                 </option>
@@ -146,8 +147,7 @@
             </template>
 
             <template v-slot:footer>
-                <button type="button" class="btn btn-success" @click="storeServiceOrder()">{{ actionButtonText
-                    }}</button>
+                <button type="button" class="btn btn-success" @click="storeServiceOrder()">{{ actionButtonText }}</button>
             </template>
         </Modal>
     </div>
@@ -172,97 +172,7 @@ const modalTitle = computed(() => {
     return props.order && props.order.id !== 0 ? 'Editar orden de servicio:' : 'Crear orden de servicio:';
 });
 
-const selectedOrder = ref<ServiceOrder>({ //Agregar todas las propiedades xq typescript espera un ServiceOrder con todas las propiedades
-    id: 0,
-    number: 0,
-    type: '',
-    part_number: '',
-    serial_number: '',
-    description: '',
-    solution: '',
-    company: {
-        name: '',
-        headquarters: ''
-    },
-    contacts: {
-        name: '',
-        last_name: '',
-        gender: '',
-        active: false,
-        identification: 0,
-        charge: '',
-        birthday: ''
-    },
-    mails: {
-        mail: ''
-    },
-    phones: {
-        phone: 0
-    },
-    addresses: {
-        address: ''
-    },
-    cities: {
-        city: ''
-    },
-    equipment_types: {
-        name: ''
-    },
-    delivery_conditions: {
-        description: ''
-    }
-})
-
-watch(
-    () => props.order,
-    (newOrder) => {
-        if (newOrder) {
-            selectedOrder.value = { ...newOrder }
-        } else {
-            selectedOrder.value = {
-                id: 0,
-                number: 0,
-                type: '',
-                part_number: '',
-                serial_number: '',
-                description: '',
-                solution: '',
-                company: {
-                    name: '',
-                    headquarters: ''
-                },
-                contacts: {
-                    name: '',
-                    last_name: '',
-                    gender: '',
-                    active: false,
-                    identification: 0,
-                    charge: '',
-                    birthday: ''
-                },
-                mails: {
-                    mail: ''
-                },
-                phones: {
-                    phone: 0
-                },
-                addresses: {
-                    address: ''
-                },
-                cities: {
-                    city: ''
-                },
-                equipment_types: {
-                    name: ''
-                },
-                delivery_conditions: {
-                    description: ''
-                }
-            }
-        }
-    },
-    { immediate: true }
-)
+const selectedOrder = ref<ServiceOrder>({})
 
 const showSolution = computed(() => !!props.order?.id)
 
@@ -270,10 +180,32 @@ const api = useApi()
 
 const companies = ref([])
 
-onMounted(() => {
-    getCompanies()
-    getResponsables()
+onMounted(async () => {
+    await getCompanies()
+    await getResponsables()
+    setupModal()
 })
+
+const setupModal = ()=>{
+    if (props?.order?.id) {
+        //do for an existing order
+    }
+    else {
+        selectedOrder.value.type = serviceTypes[0].id
+        selectedOrder.value.part_number = ''
+        selectedOrder.value.serial_number = ''
+        selectedOrder.value.description = ''
+        selectedOrder.value.solution = ''
+        selectedOrder.value.company = companies.value.length ? companies.value[0] : null
+        selectedOrder.value.company_id = companies.value.length ? companies.value[0].id : null
+        selectedOrder.value.equipment_name = ''
+        selectedOrder.value.contacts = companyContacts.value.length ? companyContacts.value[0].id : null
+        selectedOrder.value.mails = Object.keys(selectedContact.value).length ? selectedContact.email : null
+        selectedOrder.value.phones = selectedContact.value.phones.length ? selectedContact.value.phones[0].id : null
+        selectedOrder.value.addresses = companyAddresses.value.length ? companyAddresses.value[0].address : null
+        selectedOrder.value.responsible = responsables.value.length ? responsables.value[0].id : null
+    }
+}
 
 const getCompanies = async () => {
 
@@ -303,6 +235,7 @@ const companyAddresses = ref([])
 const setAddresses = (id) => {
     const company = companies.value.find((company) => company.id == id);
     companyAddresses.value = company.addresses
+    selectedOrder.value.addresses = company.addresses[0]?.address
 }
 
 const companyContacts = ref([])
@@ -314,6 +247,7 @@ const setContacts = (id) => {
     companyContacts.value = company.contacts
     selectedContactId.value = companyContacts.value.length ? companyContacts.value[0].id : null
     selectedContact.value = getSelectedContact(selectedContactId)
+    selectedOrder.value.contacts = selectedContactId
 }
 
 const changeSelectedContacts = (id) => {
@@ -322,14 +256,13 @@ const changeSelectedContacts = (id) => {
 }
 
 const getSelectedContact = () => {
-    return companyContacts.value.find((contact) => contact.id == selectedContactId.value);
+    const contactSelected = companyContacts.value.find((contact) => contact.id == selectedContactId.value);
+    selectedOrder.value.phones = contactSelected.phones[0].id
+    return contactSelected
 }
 
 const storeServiceOrder = async () => {
     const response = await api.post('/service-orders', selectedOrder.value)
-
-    console.log(response)
-
 }
 const updateServiceOrder = async () => {
     //do
@@ -350,155 +283,11 @@ const serviceTypes = [
     },
 ]
 
-// const responsables = [
-//     {
-//         "id": "681153412383462ca7c83ae0",
-//         "name": "Lindsey Quinn"
-//     },
-//     {
-//         "id": "681153411d9b86c5f67a49b4",
-//         "name": "Sherrie Hodges"
-//     },
-//     {
-//         "id": "68115341a436545fa3abf376",
-//         "name": "Harriett Benjamin"
-//     },
-//     {
-//         "id": "68115341254e97df8aa64340",
-//         "name": "Good Delgado"
-//     },
-//     {
-//         "id": "68115341327a43856907214e",
-//         "name": "Elise Gardner"
-//     },
-//     {
-//         "id": "68115341baf983e6d6a58687",
-//         "name": "Fanny Green"
-//     },
-//     {
-//         "id": "681153412649cc4459479202",
-//         "name": "Margarita Burke"
-//     },
-//     {
-//         "id": "68115341ccd72df661e04b2b",
-//         "name": "Reese Hutchinson"
-//     },
-//     {
-//         "id": "6811534183fce2082f1a573a",
-//         "name": "Susan Collins"
-//     },
-//     {
-//         "id": "681153417513b3a4be3c6544",
-//         "name": "Bird Jensen"
-//     },
-//     {
-//         "id": "68115341b972baa565c67802",
-//         "name": "Janet Edwards"
-//     },
-//     {
-//         "id": "68115341a0a540f918053088",
-//         "name": "Goodman Bullock"
-//     },
-//     {
-//         "id": "681153417c93ebf21997f063",
-//         "name": "Opal Cunningham"
-//     },
-//     {
-//         "id": "681153417a6c5d159f6cd879",
-//         "name": "Chandra Langley"
-//     },
-//     {
-//         "id": "68115341c72e2ea71ad01468",
-//         "name": "Susanne Mcclure"
-//     },
-//     {
-//         "id": "68115341879e31b1121a7f2f",
-//         "name": "Salas Campos"
-//     },
-//     {
-//         "id": "68115341f632cf9d0bb298f5",
-//         "name": "Stevens Todd"
-//     }
-// ]
-
-// const companies = [
-//     {
-//         "id": "6811546aa035d0c6c482fdd5",
-//         "company": "NEWCUBE"
-//     },
-//     {
-//         "id": "6811546a7dfd00922a8c3e9b",
-//         "company": "IZZBY"
-//     },
-//     {
-//         "id": "6811546ae23be49a1a1dfae9",
-//         "company": "JUNIPOOR"
-//     },
-//     {
-//         "id": "6811546a34e8c0d5514ad362",
-//         "company": "RAMEON"
-//     },
-//     {
-//         "id": "6811546aa8f4feccd3287ae1",
-//         "company": "AQUAZURE"
-//     },
-//     {
-//         "id": "6811546acf4e2b704f4b9427",
-//         "company": "CYTREK"
-//     },
-//     {
-//         "id": "6811546af079d1d0ab075d5e",
-//         "company": "KIGGLE"
-//     },
-//     {
-//         "id": "6811546a11a0a6bd4924e79b",
-//         "company": "VITRICOMP"
-//     },
-//     {
-//         "id": "6811546ad002f7dca219e2ef",
-//         "company": "LOCAZONE"
-//     },
-//     {
-//         "id": "6811546afba277b7c4119160",
-//         "company": "CODAX"
-//     },
-//     {
-//         "id": "6811546a2bd9382c38efd253",
-//         "company": "ENDICIL"
-//     },
-//     {
-//         "id": "6811546a1d447657b8115365",
-//         "company": "ZENTIA"
-//     },
-//     {
-//         "id": "6811546a3fe4c9fb879d847d",
-//         "company": "CUIZINE"
-//     },
-//     {
-//         "id": "6811546a81ff5044423577a6",
-//         "company": "ZILLACON"
-//     },
-//     {
-//         "id": "6811546a32e691a43f851896",
-//         "company": "VIAGREAT"
-//     },
-//     {
-//         "id": "6811546af73d356ecff66622",
-//         "company": "GREEKER"
-//     },
-//     {
-//         "id": "6811546ad8a8363a192233fb",
-//         "company": "NIXELT"
-//     },
-//     {
-//         "id": "6811546a735fa58b2da476be",
-//         "company": "CENTURIA"
-//     }
-// ]
 </script>
 
 <style scoped>
 .font {
     color: #5d5d5d;
 }
-</style>
+</style>import type { idText } from 'typescript';
+
