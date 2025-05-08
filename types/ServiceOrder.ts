@@ -1,8 +1,10 @@
 export interface Company {
+    id: number,
     name: string,
     headquarters: string
 }
 export interface Contact {
+    id: number, 
     name: string,
     last_name: string,
     gender: string,
@@ -21,6 +23,7 @@ export interface Address {
     address: string
 }
 export interface City {
+    id: number, 
     city: string
 }
 export interface EquipmentType {
@@ -38,11 +41,12 @@ export interface ServiceOrder {
     description: string,
     solution: string,
     company: Company,
+    company_id: number,
     delivery_conditions: DeliveryConditions
+    equipment_name: string,
     contacts: Contact[],
     mails: Email[],
     phones: Phone[],
     addresses: Address[],
     cities: City[],
-    // equipment_types: EquipmentType[]
 }

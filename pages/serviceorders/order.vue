@@ -15,20 +15,8 @@
                         <div class="mb-3 col-6">
                             <label for="company" class="font form-label fw-bold">Empresa:</label>
                             <div class="input-group">
-                                <select id="company" class="form-select">
-                                    <option :value="company.id" v-for="company in companies">{{ company.company }}
-                                    </option>
-                                </select>
-                                <button class="btn" style="background-color: #ec474f;">
-                                    <img src="../../public/plus-solid.svg" alt="" style="width: 20px; height: 20px;">
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mb-3 col-5">
-                            <label for="company" class="font form-label fw-bold">Sede:</label>
-                            <div class="input-group">
-                                <select id="company" class="form-select">
-                                    <option :value="company.id" v-for="company in companies">{{ company.company }}
+                                <select id="company" class="form-select" @change="setAddresses($event.target.value)">
+                                    <option :value="company.id" v-for="company in companies">{{ company.name }}
                                     </option>
                                 </select>
                                 <button class="btn" style="background-color: #ec474f;">
@@ -38,8 +26,11 @@
                         </div>
                         <div class="col-3 mb-3">
                             <label for="address" class="font form-label fw-bold">Dirección:</label>
-                            <input type="text" id="address" class="form-control w-100"
-                                v-model="selectedOrder.addresses" disabled />
+                        
+                            <select id="company" class="form-select">
+                                <option :value="selectedOrder?.addresses" v-for="address in companyAddresses">{{ address.address }}
+                                </option>
+                            </select>
                         </div>
                         <div class="mb-3 col-3">
                             <label for="company" class="font form-label fw-bold">Contacto:</label>
@@ -54,20 +45,17 @@
 
                         <div class="col-3 mb-3">
                             <label for="cc" class="font form-label fw-bold">C.C</label>
-                            <input type="text" id="cc" class="form-control"
-                                v-model="selectedOrder.contacts" disabled />
+                            <input type="text" id="cc" class="form-control" v-model="selectedOrder.contacts" disabled />
                         </div>
 
                         <div class="col-3 mb-3">
                             <label for="cel" class="font form-label fw-bold">Teléfono:</label>
-                            <input type="text" id="cel" class="form-control" v-model="selectedOrder.phones"
-                                disabled />
+                            <input type="text" id="cel" class="form-control" v-model="selectedOrder.phones" disabled />
                         </div>
 
                         <div class="col-3 mb-3">
                             <label for="cell" class="font form-label fw-bold">Celular:</label>
-                            <input type="text" id="cell" class="form-control" v-model="selectedOrder.phones"
-                                disabled />
+                            <input type="text" id="cell" class="form-control" v-model="selectedOrder.phones" disabled />
                         </div>
 
                         <div class="col-4 mb-3">
@@ -163,14 +151,15 @@
             </template>
 
             <template v-slot:footer>
-                <button type="button" class="btn btn-success">{{ actionButtonText }}</button>
+                <button type="button" class="btn btn-success" @click="storeServiceOrder()">{{ actionButtonText
+                    }}</button>
             </template>
         </Modal>
     </div>
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, ref, computed } from 'vue';
+import { defineAsyncComponent, ref, computed, onMounted } from 'vue';
 import type { ServiceOrder } from '~/types/ServiceOrder';
 
 const closeModal = ref(false)
@@ -282,6 +271,36 @@ watch(
 
 const showSolution = computed(() => !!props.order?.id)
 
+const api = useApi()
+
+const companies = ref([])
+
+onMounted(() => {
+    getCompanies()
+})
+
+const getCompanies = async () => {
+    const response = await api.get('/companies')
+    companies.value = response.data
+}
+
+const companyAddresses = ref([])
+
+const setAddresses = (id) => {
+    const company = companies.value.find((company) => company.id == id);
+    companyAddresses.value = company.addresses
+}
+
+const storeServiceOrder = async () => {
+    const response = await api.post('/service-orders', selectedOrder.value)
+
+    console.log(response)
+
+}
+const updateServiceOrder = async () => {
+    //do
+}
+
 const responsables = [
     {
         "id": "681153412383462ca7c83ae0",
@@ -353,84 +372,84 @@ const responsables = [
     }
 ]
 
-const companies = [
-    {
-        "id": "6811546aa035d0c6c482fdd5",
-        "company": "NEWCUBE"
-    },
-    {
-        "id": "6811546a7dfd00922a8c3e9b",
-        "company": "IZZBY"
-    },
-    {
-        "id": "6811546ae23be49a1a1dfae9",
-        "company": "JUNIPOOR"
-    },
-    {
-        "id": "6811546a34e8c0d5514ad362",
-        "company": "RAMEON"
-    },
-    {
-        "id": "6811546aa8f4feccd3287ae1",
-        "company": "AQUAZURE"
-    },
-    {
-        "id": "6811546acf4e2b704f4b9427",
-        "company": "CYTREK"
-    },
-    {
-        "id": "6811546af079d1d0ab075d5e",
-        "company": "KIGGLE"
-    },
-    {
-        "id": "6811546a11a0a6bd4924e79b",
-        "company": "VITRICOMP"
-    },
-    {
-        "id": "6811546ad002f7dca219e2ef",
-        "company": "LOCAZONE"
-    },
-    {
-        "id": "6811546afba277b7c4119160",
-        "company": "CODAX"
-    },
-    {
-        "id": "6811546a2bd9382c38efd253",
-        "company": "ENDICIL"
-    },
-    {
-        "id": "6811546a1d447657b8115365",
-        "company": "ZENTIA"
-    },
-    {
-        "id": "6811546a3fe4c9fb879d847d",
-        "company": "CUIZINE"
-    },
-    {
-        "id": "6811546a81ff5044423577a6",
-        "company": "ZILLACON"
-    },
-    {
-        "id": "6811546a32e691a43f851896",
-        "company": "VIAGREAT"
-    },
-    {
-        "id": "6811546af73d356ecff66622",
-        "company": "GREEKER"
-    },
-    {
-        "id": "6811546ad8a8363a192233fb",
-        "company": "NIXELT"
-    },
-    {
-        "id": "6811546a735fa58b2da476be",
-        "company": "CENTURIA"
-    }
-]
+// const companies = [
+//     {
+//         "id": "6811546aa035d0c6c482fdd5",
+//         "company": "NEWCUBE"
+//     },
+//     {
+//         "id": "6811546a7dfd00922a8c3e9b",
+//         "company": "IZZBY"
+//     },
+//     {
+//         "id": "6811546ae23be49a1a1dfae9",
+//         "company": "JUNIPOOR"
+//     },
+//     {
+//         "id": "6811546a34e8c0d5514ad362",
+//         "company": "RAMEON"
+//     },
+//     {
+//         "id": "6811546aa8f4feccd3287ae1",
+//         "company": "AQUAZURE"
+//     },
+//     {
+//         "id": "6811546acf4e2b704f4b9427",
+//         "company": "CYTREK"
+//     },
+//     {
+//         "id": "6811546af079d1d0ab075d5e",
+//         "company": "KIGGLE"
+//     },
+//     {
+//         "id": "6811546a11a0a6bd4924e79b",
+//         "company": "VITRICOMP"
+//     },
+//     {
+//         "id": "6811546ad002f7dca219e2ef",
+//         "company": "LOCAZONE"
+//     },
+//     {
+//         "id": "6811546afba277b7c4119160",
+//         "company": "CODAX"
+//     },
+//     {
+//         "id": "6811546a2bd9382c38efd253",
+//         "company": "ENDICIL"
+//     },
+//     {
+//         "id": "6811546a1d447657b8115365",
+//         "company": "ZENTIA"
+//     },
+//     {
+//         "id": "6811546a3fe4c9fb879d847d",
+//         "company": "CUIZINE"
+//     },
+//     {
+//         "id": "6811546a81ff5044423577a6",
+//         "company": "ZILLACON"
+//     },
+//     {
+//         "id": "6811546a32e691a43f851896",
+//         "company": "VIAGREAT"
+//     },
+//     {
+//         "id": "6811546af73d356ecff66622",
+//         "company": "GREEKER"
+//     },
+//     {
+//         "id": "6811546ad8a8363a192233fb",
+//         "company": "NIXELT"
+//     },
+//     {
+//         "id": "6811546a735fa58b2da476be",
+//         "company": "CENTURIA"
+//     }
+// ]
 </script>
 
 <style scoped>
 .font {
     color: #5d5d5d;
 }
-</style>
+</style>, onMounted
