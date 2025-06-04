@@ -28,9 +28,10 @@
                         <div class="col-3 mb-3">
                             <label for="address" class="font form-label fw-bold">Dirección:</label>
 
-                            <select id="company" class="form-select" :disabled="!companyAddresses.length" v-model="selectedOrder.addresses">
+                            <select id="company" class="form-select" :disabled="!companyAddresses.length"
+                                v-model="selectedOrder.addresses">
                                 <option :value="address.address" v-for="address in companyAddresses">{{
-            address.address }}
+                                    address.address }}
                                 </option>
                             </select>
                         </div>
@@ -38,7 +39,8 @@
                             <label for="company" class="font form-label fw-bold">Contacto:</label>
                             <div class="input-group" style="height: 7px;">
                                 <select id="contacto" class="form-select" :disabled="!companyContacts?.length"
-                                    @change="changeSelectedContacts($event.target.value)" v-model="selectedOrder.contacts" >
+                                    @change="changeSelectedContacts($event.target.value)"
+                                    v-model="selectedOrder.contacts">
                                     <option :value="contact.id" v-for="contact in companyContacts">{{ contact.name }}
                                     </option>
                                 </select>
@@ -56,7 +58,8 @@
 
                         <div class="col-3 mb-3">
                             <label for="cel" class="font form-label fw-bold">Teléfono:</label>
-                            <select id="contacto" class="form-select" :disabled="!companyContacts?.length" v-model="selectedOrder.phones">
+                            <select id="contacto" class="form-select" :disabled="!companyContacts?.length"
+                                v-model="selectedOrder.phones">
                                 <option :value="phone.id" v-for="phone in selectedContact.phones">{{ phone.phone }}
                                 </option>
                             </select>
@@ -72,21 +75,27 @@
                         </div>
                         <div class="mb-3 col-4 ">
                             <label for="company" class="font form-label fw-bold">Tipo servicio:</label>
+                            <!-- <select id="company" class="form-select" v-model="selectedOrder.type">
+                                <option :value="service.id" v-for="service in serviceTypes">{{ service.label }}</option>
+                            </select> -->
                             <select id="company" class="form-select" v-model="selectedOrder.type">
                                 <option :value="service.id" v-for="service in serviceTypes">{{ service.label }}</option>
                             </select>
                         </div>
                         <div class="mb-3 col-2">
                             <label for="part_number" class="font form-label fw-bold">N° parte:</label>
-                            <input type="text" id="part_number" class="form-control" v-model="selectedOrder.part_number">
+                            <input type="text" id="part_number" class="form-control"
+                                v-model="selectedOrder.part_number">
                         </div>
                         <div class="col-4 mb-3">
                             <label for="equipment_name" class="font form-label fw-bold">Nombre equipo:</label>
-                            <input type="text" id="equipment_name" class="form-control" v-model="selectedOrder.equipment_name">
+                            <input type="text" id="equipment_name" class="form-control"
+                                v-model="selectedOrder.equipment_name">
                         </div>
                         <div class="col-2 mb-3">
                             <label for="serial_number" class="font form-label fw-bold">Número de serie:</label>
-                            <input type="text" id="serial_number" class="form-control" v-model="selectedOrder.serial_number">
+                            <input type="text" id="serial_number" class="form-control"
+                                v-model="selectedOrder.serial_number">
                         </div>
 
                         <div class="col-9 mb-3">
@@ -99,7 +108,8 @@
                         <div class="col-3 mb-3">
                             <label for="responsable" class="font form-label fw-bold">Responsable:</label>
 
-                            <select id="responsable" class="form-select" aria-label="Default select example" v-model="selectedOrder.responsible">
+                            <select id="responsable" class="form-select" aria-label="Default select example"
+                                v-model="selectedOrder.responsible">
                                 <option :value="responsable.id" v-for="responsable in responsables">
                                     {{ responsable.name }}
                                 </option>
@@ -127,7 +137,7 @@
                             <div class="col-9 mb-3">
                                 <label for="solution" class="font form-label fw-bold">Recomendaciones:</label>
                                 <textarea class="form-control" rows="5" id="solution"
-                                    v-model="selectedOrder.delivery_conditions.description"></textarea>
+                                    v-model="selectedOrder.delivery_conditions"></textarea>
                             </div>
                             <div class="col-3 mb-3">
                                 <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
@@ -146,7 +156,8 @@
             </template>
 
             <template v-slot:footer>
-                <button type="button" class="btn btn-success" @click="storeServiceOrder()">{{ actionButtonText }}</button>
+                <button type="button" class="btn btn-success" @click="storeServiceOrder()">{{ actionButtonText
+                    }}</button>
             </template>
         </Modal>
     </div>
@@ -185,9 +196,30 @@ onMounted(async () => {
     setupModal()
 })
 
-const setupModal = ()=>{
+const setupModal = () => {
     if (props?.order?.id) {
-        //do for an existing order
+        console.log(props.order)
+        selectedOrder.value = props.order;
+        console.log('wiiiiiiiiiiiii', selectedOrder.value)
+        // selectedOrder.value.number = props.order.number
+        // selectedOrder.value.company_id = props.order.company_id
+        // selectedOrder.value.company = props.order.company
+        // selectedOrder.value.type = props.order.type
+        // selectedOrder.value.description = props.order.description
+        // selectedOrder.value.solution = props.order.solution
+        // selectedOrder.value.delivery_conditions = props.order.delivery_conditions
+        // selectedOrder.value.part_number = props.order.part_number
+        // selectedOrder.value.serial_number = props.order.serial_number
+        // selectedOrder.value.equipment_name = props.order.equipment_name
+        // selectedOrder.value.addresses = props.order.addresses
+        // selectedOrder.value.contacts = props.order.contacts
+        // selectedOrder.value.mails = props.order.mails
+        // selectedOrder.value.phones = props.order.phones
+        // selectedOrder.value.responsible = props.order.responsible
+
+        //start_date
+        //deliveri_date
+
     }
     else {
         selectedOrder.value.type = serviceTypes[0].id
@@ -195,6 +227,7 @@ const setupModal = ()=>{
         selectedOrder.value.serial_number = ''
         selectedOrder.value.description = ''
         selectedOrder.value.solution = ''
+        selectedOrder.value.delivery_conditions = ''
         selectedOrder.value.company = companies.value.length ? companies.value[0] : null
         selectedOrder.value.company_id = companies.value.length ? companies.value[0].id : null
         selectedOrder.value.equipment_name = ''
@@ -204,6 +237,12 @@ const setupModal = ()=>{
         selectedOrder.value.addresses = companyAddresses.value.length ? companyAddresses.value[0].address : null
         selectedOrder.value.responsible = responsables.value.length ? responsables.value[0].id : null
     }
+}
+
+const serviceOrder = ref()
+const getServiceOrder = async () => {
+    const response = await api.get(`/service-orders/${props.order}`)
+    serviceOrder.value = response.data
 }
 
 const getCompanies = async () => {
@@ -225,7 +264,7 @@ const responsables = ref([])
 
 const getResponsables = async () => {
 
-    const response = await api.get('/contacts', {params:{'role':'responsible'}})
+    const response = await api.get('/contacts', { params: { 'role': 'responsible' } })
     responsables.value = response.data
 }
 
@@ -289,4 +328,3 @@ const serviceTypes = [
     color: #5d5d5d;
 }
 </style>import type { idText } from 'typescript';
-

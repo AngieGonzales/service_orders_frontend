@@ -29,9 +29,9 @@ export interface City {
 export interface EquipmentType {
     name: string
 }
-export interface DeliveryConditions {
-    description: string
-}
+// export interface DeliveryConditions {
+//     description: string
+// }
 export interface ServiceOrder {
     id: number,
     number: number,
@@ -42,7 +42,7 @@ export interface ServiceOrder {
     solution: string,
     company: Company,
     company_id: number,
-    delivery_conditions: DeliveryConditions
+    delivery_conditions: string,
     equipment_name: string,
     contacts: Contact[],
     mails: Email[],
