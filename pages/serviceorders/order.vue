@@ -6,7 +6,7 @@
             <template v-slot:body>
                 <div>
                     <div class="row">
-                        <div class="mb-3 col-1">
+                        <div class="mb-3 col-2">
                             <label for="number" class="font form-label fw-bold">N° orden:</label>
                             <input type="email" id="number" class="form-control" v-model="selectedOrder.number"
                                 disabled>
@@ -25,7 +25,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-3 mb-3">
+                        <div class="col-4 mb-">
                             <label for="address" class="font form-label fw-bold">Dirección:</label>
 
                             <select id="company" class="form-select" :disabled="!companyAddresses.length"
@@ -44,7 +44,7 @@
                                     <option :value="contact.id" v-for="contact in companyContacts">{{ contact.name }}
                                     </option>
                                 </select>
-                                <button class="btn" style="background-color: #ec474f;">
+                                <button class="btn" style="background-color: #ec474f;" disabled>
                                     <img src="../../public/plus-solid.svg" alt="" style="width: 20px; height: 20px;">
                                 </button>
                             </div>
@@ -65,7 +65,7 @@
                             </select>
                         </div>
 
-                        <div class="col-4 mb-3">
+                        <div class="col-3 mb-3">
                             <label for="email" class="font form-label fw-bold">Email:</label>
                             <input type="email" id="email" class="form-control" v-model="selectedContact.email"
                                 disabled />
@@ -117,12 +117,12 @@
                         </div>
 
                         <div v-if="showSolution" class="row">
-                            <div class="col-9 mb-3">
+                            <div class="col-9 mb-3 mt-3">
                                 <label for="solution" class="font form-label fw-bold">Solución:</label>
                                 <textarea class="form-control" rows="5" id="solution"
                                     v-model="selectedOrder.solution"></textarea>
                             </div>
-                            <div class="col-3 mb-3">
+                            <div class="col-3 mb-3 mt-3">
                                 <label for="responsable2" class="font form-label fw-bold">Responsable:</label>
                                 <select id="responsable" class="form-select" aria-label="Default select example">
                                     <option :value="responsable.id" v-for="responsable in responsables">
@@ -130,7 +130,7 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="mt-5 mb-1">
+                            <div class="mt-5 mb-1 d-flex justify-content-center">
                                 <label class="form-label fw-bold">Entrega</label>
                                 <hr>
                             </div>
